@@ -13,10 +13,42 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Archivos de encabezado\Pagina">
+      <UniqueIdentifier>{60719488-7092-41f9-908d-736e7e91c40c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\Pagina">
+      <UniqueIdentifier>{e85d0556-c215-4cff-9481-ed924b8a5306}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\Marcador">
+      <UniqueIdentifier>{a4ab8b79-8346-46f4-a020-85b0bda60beb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\Marcador">
+      <UniqueIdentifier>{054bcd66-8b38-41e7-9155-ba3949520c33}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
+    <ClCompile Include="Pagina.cpp">
+      <Filter>Archivos de origen\Pagina</Filter>
+    </ClCompile>
+    <ClCompile Include="Marcador.cpp">
+      <Filter>Archivos de origen\Marcador</Filter>
+    </ClCompile>
+    <ClCompile Include="VectorMarcador.cpp">
+      <Filter>Archivos de origen\Marcador</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Pagina.h">
+      <Filter>Archivos de encabezado\Pagina</Filter>
+    </ClInclude>
+    <ClInclude Include="Marcador.h">
+      <Filter>Archivos de encabezado\Marcador</Filter>
+    </ClInclude>
+    <ClInclude Include="VectorMarcador.h">
+      <Filter>Archivos de encabezado\Marcador</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
