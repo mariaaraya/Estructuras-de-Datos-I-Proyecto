@@ -127,12 +127,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Historial.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Marcador.cpp" />
     <ClCompile Include="Pagina.cpp" />
     <ClCompile Include="VectorMarcador.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Historial.h" />
+    <ClInclude Include="Libreria.h" />
     <ClInclude Include="Marcador.h" />
     <ClInclude Include="Pagina.h" />
     <ClInclude Include="VectorMarcador.h" />

@@ -2,7 +2,6 @@
 
 VectorMarcador::VectorMarcador()
 {
-
 }
 
 VectorMarcador::~VectorMarcador()
@@ -28,6 +27,16 @@ Marcador* VectorMarcador::buscarMarcador(Marcador* m)
 		}
 	}
 	return nullptr;
+}
+
+bool VectorMarcador::eliminarMarcador(Marcador* m) {
+	auto it = std::find(vecmarcador.begin(), vecmarcador.end(), m);
+	if (it != vecmarcador.end()) {
+		delete* it;  // Eliminar el objeto apuntado
+		vecmarcador.erase(it);
+		return true;
+	}
+	return false;
 }
 
 std::ostream& operator<<(std::ostream& outp, const VectorMarcador& vec)

@@ -25,6 +25,12 @@
     <Filter Include="Archivos de origen\Marcador">
       <UniqueIdentifier>{054bcd66-8b38-41e7-9155-ba3949520c33}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Archivos de encabezado\Historial">
+      <UniqueIdentifier>{65122b02-f653-4e77-898b-ab0f64fdcc29}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\Historial">
+      <UniqueIdentifier>{c0804463-172b-4895-8e9f-d9897ac8a0c3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -39,6 +45,9 @@
     <ClCompile Include="VectorMarcador.cpp">
       <Filter>Archivos de origen\Marcador</Filter>
     </ClCompile>
+    <ClCompile Include="Historial.cpp">
+      <Filter>Archivos de origen\Historial</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Pagina.h">
@@ -49,6 +58,12 @@
     </ClInclude>
     <ClInclude Include="VectorMarcador.h">
       <Filter>Archivos de encabezado\Marcador</Filter>
+    </ClInclude>
+    <ClInclude Include="Libreria.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="Historial.h">
+      <Filter>Archivos de encabezado\Historial</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
