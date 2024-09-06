@@ -131,6 +131,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Marcador.cpp" />
     <ClCompile Include="Pagina.cpp" />
+    <ClCompile Include="Pestana.cpp" />
     <ClCompile Include="VectorMarcador.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -138,6 +139,7 @@
     <ClInclude Include="Libreria.h" />
     <ClInclude Include="Marcador.h" />
     <ClInclude Include="Pagina.h" />
+    <ClInclude Include="Pestana.h" />
     <ClInclude Include="VectorMarcador.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -4,37 +4,44 @@ Historial::Historial() {}
 
 Historial::~Historial()
 {
-    for (auto lista : pestañas) {
+    for (auto lista : paginas) {
         delete lista;
     }
-    pestañas.clear();
+    paginas.clear();
 }
 
 Pagina* Historial::getPaginas(int index)
 {
-    if (index >= 0 && index < pestañas.size()) {
-        return pestañas[index];
+    if (index >= 0 && index < paginas.size()) {
+        return paginas[index];
     }
     return nullptr;
 }
 
-void Historial::agregarPestaña(Pagina* nuevaPestaña)
+void Historial::agregarPagina(Pagina* nuevaPagina)
 {
-    pestañas.push_back(nuevaPestaña);
+    paginas.push_back(nuevaPagina);
 
 }
 
-void Historial::eliminarPestaña(int index)
+void Historial::eliminarPagina(int index)
 {
-    if (index >= 0 && index < pestañas.size()) {
-        delete pestañas[index];
-        pestañas.erase(pestañas.begin() + index);
+    if (index >= 0 && index < paginas.size()) {
+        delete paginas[index];
+        paginas.erase(paginas.begin() + index);
+    }
+}
+
+void Historial::mostrarHistorial(std::ostream& outp)
+{
+    for (const auto& pagina : paginas) {
+        outp << *pagina << std::endl;
     }
 }
 
 std::ostream& operator<<(std::ostream& outp, const Historial& historial)
 {
-    for (const auto& pestaña : historial.pestañas) {
+    for (const auto& pestaña : historial.paginas) {
         outp << *pestaña << std::endl;
     }
     return outp;

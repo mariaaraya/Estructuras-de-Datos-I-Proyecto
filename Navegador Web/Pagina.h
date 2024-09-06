@@ -25,9 +25,9 @@ public:
     static bool agregarPagina(Pagina* p);
     static void cambiarPagina(Pagina* p);
     static Pagina* obtenerPaginaActiva();
-    static void navegarAtras();
-    static void navegarAdelante();
 	static void mostrarPaginas(std::ostream& outp);
+	static void navegarAtras();
+	static void navegarAdelante();
 
 private:
 	std::string titulo;

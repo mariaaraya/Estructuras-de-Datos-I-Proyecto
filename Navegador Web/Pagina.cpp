@@ -36,7 +36,7 @@ std::ostream& operator<<(std::ostream& outp, const Pagina& p)
     return outp;
 }
 
-// Inicialización de los atributos estáticos
+ //Inicialización de los atributos estáticos
 std::list<Pagina*> Pagina::listaP;
 std::list<Pagina*>::iterator Pagina::PaginaActiva = Pagina::listaP.end();
 
@@ -47,6 +47,12 @@ bool Pagina::agregarPagina(Pagina* p) {
         PaginaActiva = listaP.begin();
     }
     return true;
+}
+
+void Pagina::mostrarPaginas(std::ostream& outp) {
+    for (const auto& pagina : listaP) {
+        outp << *pagina << std::endl;
+    }
 }
 
 void Pagina::cambiarPagina(Pagina* p) {
@@ -61,19 +67,13 @@ Pagina* Pagina::obtenerPaginaActiva() {
 }
 
 void Pagina::navegarAtras() {
-    if (PaginaActiva != listaP.begin()) {
-        --PaginaActiva;
+        if (PaginaActiva != listaP.begin()) {
+            --PaginaActiva;
+        }
     }
-}
-
-void Pagina::navegarAdelante() {
-    if (PaginaActiva != listaP.end() && std::next(PaginaActiva) != listaP.end()) {
-        ++PaginaActiva;
+    
+    void Pagina::navegarAdelante() {
+        if (PaginaActiva != listaP.end() && std::next(PaginaActiva) != listaP.end()) {
+            ++PaginaActiva;
+        }
     }
-}
-
-void Pagina::mostrarPaginas(std::ostream& outp) {
-    for (const auto& pagina : listaP) {
-        outp << *pagina << std::endl;
-    }
-}

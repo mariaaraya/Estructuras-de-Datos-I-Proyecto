@@ -3,8 +3,11 @@
 #include "Marcador.h"
 #include "VectorMarcador.h"
 #include "Pagina.h"
+#include "Pestana.h"
 
 int main() {
+    //Crear pestañas
+    Pestana* pestana1 = new Pestana();
     // Crear marcadores
     Marcador marcador1("Google");
     marcador1.agregarEtiqueta("Busqueda");
@@ -59,15 +62,15 @@ int main() {
 
     // Crear un historial de páginas
     Historial historial;
-    historial.agregarPestaña(new Pagina("StackOverflow", "https://stackoverflow.com", false));
-    historial.agregarPestaña(new Pagina("Reddit", "https://www.reddit.com", false));
+    historial.agregarPagina(new Pagina("StackOverflow", "https://stackoverflow.com", false));
+    historial.agregarPagina(new Pagina("Reddit", "https://www.reddit.com", false));
 
     // Mostrar historial
     std::cout << "\nHistorial de pestanas:\n";
     std::cout << historial << std::endl;
 
     // Eliminar una pestaña del historial
-    historial.eliminarPestaña(0);
+    historial.eliminarPagina(0);
     std::cout << "\nHistorial de pestanas despues de eliminar la primera:\n";
     std::cout << historial << std::endl;
 

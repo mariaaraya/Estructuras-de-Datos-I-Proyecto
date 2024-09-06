@@ -9,10 +9,11 @@ public:
     ~Historial();
 
     Pagina* getPaginas(int index);
-    void agregarPestaña(Pagina* nuevaPestaña = new Pagina());
-    void eliminarPestaña(int index);
+    void agregarPagina(Pagina* nuevaPagina = new Pagina());
+    void eliminarPagina(int index);
+    void mostrarHistorial(std::ostream&);
     friend std::ostream& operator<<(std::ostream& outp, const Historial&);
 
 private:
-    std::vector<Pagina*> pestañas;
+    std::vector<Pagina*> paginas;
 };
