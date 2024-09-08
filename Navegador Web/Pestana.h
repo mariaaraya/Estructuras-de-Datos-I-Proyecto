@@ -5,20 +5,29 @@
 class Pestana
 {
 public:
-	Pestana(Historial* = nullptr);
+	Pestana(bool);
+	Pestana(bool, Historial*);
 	~Pestana();
 
 	Historial* getHistorial();
 	void setHistorial(Historial*);
+	bool getModoIncognito();
+	void setModoIncognito(bool);
+	//Metodo del historial
+	void PnavegarAdelante();
+	void PnavegarAtras();
+	bool visitarPagina(Pagina*);
+	//Metodo del marcadores
+	void PagregarMarcador(Marcador*);
+	void PagregarEtiqueta(std::string);
+	// Archivos binarios 
+	void guardarPestana(std::ofstream&);
+	void leerPestana(std::ifstream&);
 
-	void irAdelante();
-	void irAtras();
-	void visitarPagina(std::string);
 
-	void mostrarHistorial(std::ostream&) const;
+	friend std::ostream& operator<<(std::ostream& outp, const Pestana&);
 
 private:
+	bool  modoIncognito; // true es que si es modoIncognito
 	Historial* historial;
-
 };
-

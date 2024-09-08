@@ -135,8 +135,10 @@
     <ClCompile Include="Pagina.cpp" />
     <ClCompile Include="Pestana.cpp" />
     <ClCompile Include="VectorMarcador.cpp" />
+    <ClCompile Include="VectorPaginas.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Clases.h" />
     <ClInclude Include="Configuracion.h" />
     <ClInclude Include="Historial.h" />
     <ClInclude Include="Libreria.h" />
@@ -145,6 +147,7 @@
     <ClInclude Include="Pagina.h" />
     <ClInclude Include="Pestana.h" />
     <ClInclude Include="VectorMarcador.h" />
+    <ClInclude Include="VectorPaginas.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

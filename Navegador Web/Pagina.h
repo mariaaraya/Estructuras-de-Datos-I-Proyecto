@@ -5,36 +5,30 @@
 class Pagina
 {
 public:
-	Pagina(std::string = "TITULO", std::string = "URL", bool = false);
+	Pagina(std::string = " ", std::string = " ");
+	Pagina(std::string, std::string, Marcador*);
+	Pagina(const Pagina& otra);
 	virtual~Pagina();
 
 	// Getters
 	std::string getTitulo() const;
 	std::string getURL() const;
-	bool getModoIncognito() const;
+	Marcador* getMarcador();
 	// Setters
 	void setTitulo(std::string);
 	void setURL(std::string);
-	void setModoIncognito(bool);
-
+	void setMarcador(Marcador*);
+	void agregarEtiqueta(std::string);
+	// archivos binarios 
+	void guardarPagina(std::ofstream&);
+	void leerPagina(std::ifstream&);
 	Pagina& operator=(const Pagina&);
 	bool operator==(const Pagina&);
 	friend std::ostream& operator<<(std::ostream& outp, const Pagina&);
 
-    // Métodos estáticos para manejo de lista de páginas (ya no hay clase lista pagina)
-    static bool agregarPagina(Pagina* p);
-    static void cambiarPagina(Pagina* p);
-    static Pagina* obtenerPaginaActiva();
-	static void mostrarPaginas(std::ostream& outp);
-	static void navegarAtras();
-	static void navegarAdelante();
 
 private:
 	std::string titulo;
 	std::string URL;
-	bool modoIncognito; // true incognito
-
-    // Atributos estáticos para la lista de páginas y navegación
-    static std::list<Pagina*> listaP;
-    static std::list<Pagina*>::iterator PaginaActiva;
+	Marcador* marcador;
 };

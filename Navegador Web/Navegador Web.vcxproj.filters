@@ -31,6 +31,15 @@
     <Filter Include="Archivos de origen\Historial">
       <UniqueIdentifier>{c0804463-172b-4895-8e9f-d9897ac8a0c3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Archivos de encabezado\Otro">
+      <UniqueIdentifier>{6e5b893d-3952-4ff2-88b0-0cc9ac06f41e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\NavegadorWeb">
+      <UniqueIdentifier>{c1121b9d-3d21-4881-9d26-5067c7a3f3aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\NavegadorWeb">
+      <UniqueIdentifier>{8108b6ab-24c1-4fd5-88a3-f6381297697f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -48,6 +57,18 @@
     <ClCompile Include="Historial.cpp">
       <Filter>Archivos de origen\Historial</Filter>
     </ClCompile>
+    <ClCompile Include="Configuracion.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="Pestana.cpp">
+      <Filter>Archivos de origen\Historial</Filter>
+    </ClCompile>
+    <ClCompile Include="NavegadorWeb.cpp">
+      <Filter>Archivos de origen\NavegadorWeb</Filter>
+    </ClCompile>
+    <ClCompile Include="VectorPaginas.cpp">
+      <Filter>Archivos de origen\NavegadorWeb</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Pagina.h">
@@ -59,11 +80,26 @@
     <ClInclude Include="VectorMarcador.h">
       <Filter>Archivos de encabezado\Marcador</Filter>
     </ClInclude>
-    <ClInclude Include="Libreria.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
     <ClInclude Include="Historial.h">
       <Filter>Archivos de encabezado\Historial</Filter>
+    </ClInclude>
+    <ClInclude Include="Configuracion.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="Libreria.h">
+      <Filter>Archivos de encabezado\Otro</Filter>
+    </ClInclude>
+    <ClInclude Include="Clases.h">
+      <Filter>Archivos de encabezado\Otro</Filter>
+    </ClInclude>
+    <ClInclude Include="Pestana.h">
+      <Filter>Archivos de encabezado\Historial</Filter>
+    </ClInclude>
+    <ClInclude Include="NavegadorWeb.h">
+      <Filter>Archivos de encabezado\NavegadorWeb</Filter>
+    </ClInclude>
+    <ClInclude Include="VectorPaginas.h">
+      <Filter>Archivos de encabezado\NavegadorWeb</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

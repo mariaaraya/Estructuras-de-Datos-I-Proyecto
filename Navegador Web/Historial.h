@@ -6,14 +6,22 @@ class Historial
 {
 public:
     Historial();
-    ~Historial();
-
-    Pagina* getPaginas(int index);
-    void agregarPagina(Pagina* nuevaPagina = new Pagina());
-    void eliminarPagina(int index);
-    void mostrarHistorial(std::ostream&);
-    friend std::ostream& operator<<(std::ostream& outp, const Historial&);
-
+    virtual~Historial();
+    bool agregarPagina(Pagina* p);
+    void cambiarPagina(Pagina* p);
+    Pagina* obtenerPaginaActiva();
+    void mostrarPaginaActiva();
+    void navegarAtras();
+    void navegarAdelante();
+    //Metodo del marcadores
+    void agregarMarcador(Marcador*);
+    void agregarEtiqueta(std::string);
+    // Archivos binarios 
+    void guardarHistorial(std::ofstream&);
+    void leerHistorial(std::ifstream&);
+    friend std::ostream& operator<<(std::ostream&, const Historial&);
 private:
-    std::vector<Pagina*> paginas;
+    // Atributos estáticos para la lista de páginas y navegación
+    std::list<Pagina*> listaP;
+    std::list<Pagina*>::iterator PaginaActiva;
 };

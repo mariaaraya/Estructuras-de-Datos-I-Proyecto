@@ -1,31 +1,77 @@
 #include "Pestana.h"
 
-Pestana::Pestana(Historial* historial):historial(historial){}
+Pestana::Pestana(bool modo) :modoIncognito(modo), historial(new Historial) {}
 
-Pestana::~Pestana() {delete historial;}
+Pestana::Pestana(bool modo, Historial* historial)
+	:modoIncognito(modo), historial(historial) {}
 
-Historial* Pestana::getHistorial() {return historial;}
-
-void Pestana::setHistorial(Historial* historial) {this->historial = historial;}
-
-void Pestana::irAdelante()
-{
-	//Falta implementar
+Pestana::~Pestana() {
+	delete historial;
 }
 
-void Pestana::irAtras()
+Historial* Pestana::getHistorial() { return historial; }
+void Pestana::setHistorial(Historial* historial) { this->historial = historial; }
+bool Pestana::getModoIncognito() { return modoIncognito; }
+void Pestana::setModoIncognito(bool modo) { modoIncognito = modo; }
+void Pestana::PnavegarAdelante()
 {
-	//Falta implementar
+	historial->navegarAdelante();
 }
 
-void Pestana::visitarPagina(std::string url)
+void Pestana::PnavegarAtras()
 {
-	//Falta implementar
+	historial->navegarAtras();
 }
 
-void Pestana::mostrarHistorial(std::ostream& outp) const
+bool Pestana::visitarPagina(Pagina* aux)
 {
-	if (historial) {
-		historial->mostrarHistorial(outp);
+	historial->agregarPagina(aux);
+	return true;
+}
+
+void Pestana::PagregarMarcador(Marcador* marcador)
+{
+	historial->agregarMarcador(marcador);
+}
+
+void Pestana::PagregarEtiqueta(std::string etiqueta)
+{
+	historial->agregarEtiqueta(etiqueta);
+}
+
+void Pestana::guardarPestana(std::ofstream& handle)
+{
+	// Guardar el modo incognito
+	handle.write(reinterpret_cast<char*>(&modoIncognito), sizeof(modoIncognito));
+
+	// Guardar el historial
+	bool hasHistorial = (historial != nullptr);
+	handle.write(reinterpret_cast<char*>(&hasHistorial), sizeof(hasHistorial));
+	if (hasHistorial) {
+		historial->guardarHistorial(handle);
 	}
+}
+
+void Pestana::leerPestana(std::ifstream& handle)
+{
+	// Leer el modo incognito
+	handle.read(reinterpret_cast<char*>(&modoIncognito), sizeof(modoIncognito));
+
+	// Leer el historial
+	bool hasHistorial;
+	handle.read(reinterpret_cast<char*>(&hasHistorial), sizeof(hasHistorial));
+	if (hasHistorial) {
+		if (historial == nullptr) {
+			historial = new Historial();
+		}
+		historial->leerHistorial(handle);
+	}
+
+}
+
+
+std::ostream& operator<<(std::ostream& outp, const Pestana& pestana)
+{
+	outp << *pestana.historial << std::endl;
+	return outp;
 }
