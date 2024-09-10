@@ -49,12 +49,10 @@ void Marcador::guardarMarcador(std::ofstream& handle)
 
 void Marcador::leerMarcador(std::ifstream& handle) {
 
-
     size_t nombreSize;
     handle.read(reinterpret_cast<char*>(&nombreSize), sizeof(nombreSize));
-    this->nombre.resize(nombreSize);
-    handle.read(&this->nombre[0], nombreSize);
-
+    nombre.resize(nombreSize);
+    handle.read(&nombre[0], nombreSize);
     // Leer las etiquetas
     size_t etiquetasSize;
     handle.read(reinterpret_cast<char*>(&etiquetasSize), sizeof(etiquetasSize));
@@ -65,9 +63,7 @@ void Marcador::leerMarcador(std::ifstream& handle) {
         etiqueta.resize(etiquetaSize);
         handle.read(&etiqueta[0], etiquetaSize);
     }
-
-
-    handle.close();
+    //handle.close();
 }
 
 Marcador& Marcador::operator=(const Marcador& m)

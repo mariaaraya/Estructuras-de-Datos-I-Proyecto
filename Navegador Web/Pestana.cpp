@@ -40,7 +40,7 @@ void Pestana::PagregarEtiqueta(std::string etiqueta)
 }
 
 void Pestana::guardarPestana(std::ofstream& handle)
-{
+{ 
 	// Guardar el modo incognito
 	handle.write(reinterpret_cast<char*>(&modoIncognito), sizeof(modoIncognito));
 
@@ -53,7 +53,7 @@ void Pestana::guardarPestana(std::ofstream& handle)
 }
 
 void Pestana::leerPestana(std::ifstream& handle)
-{
+{ 
 	// Leer el modo incognito
 	handle.read(reinterpret_cast<char*>(&modoIncognito), sizeof(modoIncognito));
 
@@ -66,7 +66,6 @@ void Pestana::leerPestana(std::ifstream& handle)
 		}
 		historial->leerHistorial(handle);
 	}
-
 }
 
 

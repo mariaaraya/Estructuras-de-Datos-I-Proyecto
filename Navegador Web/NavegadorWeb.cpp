@@ -78,26 +78,23 @@ bool NavegadorWeb::visitarPagina(std::string p)
 }
 
 void NavegadorWeb::guardarNavegadorWeb(std::string& nombreArchivo) {
-    std::ofstream handle;
-
     // Abrir el archivo en modo binario y agregar datos al final
-    handle.open(nombreArchivo, std::ios::binary | std::ios::app);
+    std::ofstream handle(nombreArchivo, std::ios::binary | std::ios::trunc);
 
     if (!handle.is_open()) {
-        std::cout << "Error al abrir el archivo '" << nombreArchivo << "'";
-        exit(EXIT_FAILURE);
+        std::cerr << "Error al abrir el archivo '" << nombreArchivo << "'\n";
+        return;
     }
+
     size_t numPestanas = 0;
     for (const auto& pestana : listaP) {
         if (!pestana->getModoIncognito()) {
             ++numPestanas;
         }
     }
-
     // Guardar el número de pestañas que no están en modo incógnito
     handle.write(reinterpret_cast<char*>(&numPestanas), sizeof(numPestanas));
 
-    // Guardar cada pestaña que no está en modo incógnito
     for (const auto& pestana : listaP) {
         if (!pestana->getModoIncognito()) {
             pestana->guardarPestana(handle);
@@ -109,21 +106,16 @@ void NavegadorWeb::guardarNavegadorWeb(std::string& nombreArchivo) {
 
 // Implementación de leerNavegadorWeb
 void NavegadorWeb::leerNavegadorWeb(std::string& nombreArchivo) {
-    std::ifstream handle;
-
-    // Abrir el archivo en modo binario
-    handle.open(nombreArchivo, std::ios::binary);
+    std::ifstream handle(nombreArchivo, std::ios::binary);
 
     if (!handle.is_open()) {
         std::cout << "Error al abrir el archivo '" << nombreArchivo << "'";
         exit(EXIT_FAILURE);
     }
-
-    // Leer el número de pestañas
+    //leer numero pestañas
     size_t numPestanas;
     handle.read(reinterpret_cast<char*>(&numPestanas), sizeof(numPestanas));
-
-    // Leer cada pestaña
+    //leer cada pestaña
     for (size_t i = 0; i < numPestanas; ++i) {
         Pestana* pestana = new Pestana(false); // Inicializa con un valor por defecto
         pestana->leerPestana(handle);

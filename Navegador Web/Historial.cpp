@@ -75,7 +75,6 @@ void Historial::guardarHistorial(std::ofstream& handle)
 	for (const auto& pagina : listaP) {
 		pagina->guardarPagina(handle);
 	}
-
 }
 
 void Historial::leerHistorial(std::ifstream& handle)
@@ -83,9 +82,8 @@ void Historial::leerHistorial(std::ifstream& handle)
 	size_t numPaginas;
 	handle.read(reinterpret_cast<char*>(&numPaginas), sizeof(numPaginas));
 
-	// Leer cada página
 	for (size_t i = 0; i < numPaginas; ++i) {
-		Pagina* pagina = new Pagina("", "");
+		Pagina* pagina = new Pagina();
 		pagina->leerPagina(handle);
 		listaP.push_back(pagina);
 	}

@@ -1,5 +1,5 @@
 #include "Clases.h"
-
+#include "Libreria.h"
 
 int main() {
 
@@ -15,7 +15,7 @@ int main() {
     navegador.visitarPagina("Tumblr");
     std::cout << "Navegador 1 ----------\n" << navegador << std::endl;
 
-    // Guardar el estado del navegador en un archivo
+    /// Guardar el estado del navegador en un archivo
     std::string nombreArchivo = "navegador.dat";
     navegador.guardarNavegadorWeb(nombreArchivo);
 
@@ -23,8 +23,10 @@ int main() {
     NavegadorWeb navegadorLeido;
     navegadorLeido.leerNavegadorWeb(nombreArchivo);
 
+    // Mostrar el estado del navegador después de leer
     std::cout << "Navegador 2 ----------\n" << navegadorLeido << std::endl;
-
+    
+    system("pause");
     return 0;
 }
 

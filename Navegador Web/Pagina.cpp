@@ -42,7 +42,6 @@ void Pagina::agregarEtiqueta(std::string tag)
 
 void Pagina::guardarPagina(std::ofstream& handle)
 {
-
     // Guardar el título
     size_t tituloSize = titulo.size();
     handle.write(reinterpret_cast<char*>(&tituloSize), sizeof(tituloSize));
@@ -61,8 +60,8 @@ void Pagina::guardarPagina(std::ofstream& handle)
     }
 }
 
-void Pagina::leerPagina(std::ifstream& handle)
-{
+void Pagina::leerPagina(std::ifstream& handle){
+
     // Leer el título
     size_t tituloSize;
     handle.read(reinterpret_cast<char*>(&tituloSize), sizeof(tituloSize));
@@ -85,9 +84,6 @@ void Pagina::leerPagina(std::ifstream& handle)
         marcador->leerMarcador(handle);
     }
 }
-
-
-
 
 Pagina& Pagina::operator=(const Pagina& p)
 {
