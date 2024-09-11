@@ -69,6 +69,9 @@
     <ClCompile Include="VectorPaginas.cpp">
       <Filter>Archivos de origen\NavegadorWeb</Filter>
     </ClCompile>
+    <ClCompile Include="GestorArchivos.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Pagina.h">
@@ -100,6 +103,9 @@
     </ClInclude>
     <ClInclude Include="VectorPaginas.h">
       <Filter>Archivos de encabezado\NavegadorWeb</Filter>
+    </ClInclude>
+    <ClInclude Include="GestorArchivos.h">
+      <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

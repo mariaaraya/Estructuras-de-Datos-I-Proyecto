@@ -39,34 +39,6 @@ void Pestana::PagregarEtiqueta(std::string etiqueta)
 	historial->agregarEtiqueta(etiqueta);
 }
 
-void Pestana::guardarPestana(std::ofstream& handle)
-{ 
-	// Guardar el modo incognito
-	handle.write(reinterpret_cast<char*>(&modoIncognito), sizeof(modoIncognito));
-
-	// Guardar el historial
-	bool hasHistorial = (historial != nullptr);
-	handle.write(reinterpret_cast<char*>(&hasHistorial), sizeof(hasHistorial));
-	if (hasHistorial) {
-		historial->guardarHistorial(handle);
-	}
-}
-
-void Pestana::leerPestana(std::ifstream& handle)
-{ 
-	// Leer el modo incognito
-	handle.read(reinterpret_cast<char*>(&modoIncognito), sizeof(modoIncognito));
-
-	// Leer el historial
-	bool hasHistorial;
-	handle.read(reinterpret_cast<char*>(&hasHistorial), sizeof(hasHistorial));
-	if (hasHistorial) {
-		if (historial == nullptr) {
-			historial = new Historial();
-		}
-		historial->leerHistorial(handle);
-	}
-}
 
 
 std::ostream& operator<<(std::ostream& outp, const Pestana& pestana)
@@ -74,3 +46,32 @@ std::ostream& operator<<(std::ostream& outp, const Pestana& pestana)
 	outp << *pestana.historial << std::endl;
 	return outp;
 }
+
+//void Pestana::guardarPestana(std::ofstream& handle)
+//{ 
+//	// Guardar el modo incognito
+//	handle.write(reinterpret_cast<char*>(&modoIncognito), sizeof(modoIncognito));
+//
+//	// Guardar el historial
+//	bool hasHistorial = (historial != nullptr);
+//	handle.write(reinterpret_cast<char*>(&hasHistorial), sizeof(hasHistorial));
+//	if (hasHistorial) {
+//		historial->guardarHistorial(handle);
+//	}
+//}
+//
+//void Pestana::leerPestana(std::ifstream& handle)
+//{ 
+//	// Leer el modo incognito
+//	handle.read(reinterpret_cast<char*>(&modoIncognito), sizeof(modoIncognito));
+//
+//	// Leer el historial
+//	bool hasHistorial;
+//	handle.read(reinterpret_cast<char*>(&hasHistorial), sizeof(hasHistorial));
+//	if (hasHistorial) {
+//		if (historial == nullptr) {
+//			historial = new Historial();
+//		}
+//		historial->leerHistorial(handle);
+//	}
+//}

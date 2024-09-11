@@ -128,6 +128,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Configuracion.cpp" />
+    <ClCompile Include="GestorArchivos.cpp" />
     <ClCompile Include="Historial.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Marcador.cpp" />
@@ -140,6 +141,7 @@
   <ItemGroup>
     <ClInclude Include="Clases.h" />
     <ClInclude Include="Configuracion.h" />
+    <ClInclude Include="GestorArchivos.h" />
     <ClInclude Include="Historial.h" />
     <ClInclude Include="Libreria.h" />
     <ClInclude Include="Marcador.h" />

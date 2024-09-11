@@ -19,9 +19,6 @@ public:
 	void setURL(std::string);
 	void setMarcador(Marcador*);
 	void agregarEtiqueta(std::string);
-	// archivos binarios 
-	void guardarPagina(std::ofstream&);
-	void leerPagina(std::ifstream&);
 	Pagina& operator=(const Pagina&);
 	bool operator==(const Pagina&);
 	friend std::ostream& operator<<(std::ostream& outp, const Pagina&);
@@ -32,3 +29,7 @@ private:
 	std::string URL;
 	Marcador* marcador;
 };
+
+// archivos binarios 
+	//void guardarPagina(std::ofstream&);
+	//void leerPagina(std::ifstream&);

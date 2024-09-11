@@ -5,3 +5,4 @@
 #include "VectorPaginas.h"
 #include "Pestana.h"
 #include "NavegadorWeb.h"
+#include "GestorArchivos.h"

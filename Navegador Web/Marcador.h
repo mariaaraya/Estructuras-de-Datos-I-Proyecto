@@ -18,9 +18,7 @@ public:
 
 	bool tieneEtiqueta(const std::string&) const;
 
-	// archivos binarios
-	void guardarMarcador(std::ofstream&);
-	void leerMarcador(std::ifstream&);
+
 	Marcador& operator=(const Marcador&);
 	bool operator==(const Marcador&) const;
 	friend std::ostream& operator<<(std::ostream& outp, const Marcador&);
@@ -28,3 +26,6 @@ private:
 	std::string nombre;
 	std::vector<std::string> etiquetas; //nuevo
 };
+// archivos binarios
+//void guardarMarcador(std::ofstream&);
+//void leerMarcador(std::ifstream&);

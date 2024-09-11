@@ -20,10 +20,6 @@ public:
 	//Metodo del marcadores
 	void PagregarMarcador(Marcador*);
 	void PagregarEtiqueta(std::string);
-	// Archivos binarios 
-	void guardarPestana(std::ofstream&);
-	void leerPestana(std::ifstream&);
-
 
 	friend std::ostream& operator<<(std::ostream& outp, const Pestana&);
 
@@ -31,3 +27,7 @@ private:
 	bool  modoIncognito; // true es que si es modoIncognito
 	Historial* historial;
 };
+
+// Archivos binarios 
+//void guardarPestana(std::ofstream&);
+//void leerPestana(std::ifstream&);

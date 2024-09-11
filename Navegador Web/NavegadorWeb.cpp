@@ -18,8 +18,22 @@ bool NavegadorWeb::agregarPestana(bool modoIn)
     PestanaActiva = --listaP.end();
     return true;
 }
+/*Para archivos*/
+void NavegadorWeb::agregarPestana(Pestana* p)
+{
+    listaP.push_back(p);
+    PestanaActiva = --listaP.end();
+}
 
-Pestana* NavegadorWeb::obtenerPaginaActiva()
+Pagina* NavegadorWeb::obtenerPaginaActiva()
+{
+    if (PestanaActiva != listaP.end()) {
+        return (*PestanaActiva)->getHistorial()->obtenerPaginaActiva();
+    }
+    return nullptr;
+}
+
+Pestana* NavegadorWeb::obtenerPestanaActiva()
 {
     if (PestanaActiva != listaP.end()) {
         return *PestanaActiva;
@@ -44,6 +58,11 @@ void NavegadorWeb::navegarAbajo()
     if (PestanaActiva != listaP.end() && std::next(PestanaActiva) != listaP.end()) {
         ++PestanaActiva;
     }
+}
+
+const std::list<Pestana*>& NavegadorWeb::obtenerListaPestanas() const
+{
+    return listaP;
 }
 
 void NavegadorWeb::agregarMarcador(Marcador* marcador)
@@ -77,53 +96,6 @@ bool NavegadorWeb::visitarPagina(std::string p)
     return false;
 }
 
-void NavegadorWeb::guardarNavegadorWeb(std::string& nombreArchivo) {
-    // Abrir el archivo en modo binario y agregar datos al final
-    std::ofstream handle(nombreArchivo, std::ios::binary | std::ios::trunc);
-
-    if (!handle.is_open()) {
-        std::cerr << "Error al abrir el archivo '" << nombreArchivo << "'\n";
-        return;
-    }
-
-    size_t numPestanas = 0;
-    for (const auto& pestana : listaP) {
-        if (!pestana->getModoIncognito()) {
-            ++numPestanas;
-        }
-    }
-    // Guardar el número de pestañas que no están en modo incógnito
-    handle.write(reinterpret_cast<char*>(&numPestanas), sizeof(numPestanas));
-
-    for (const auto& pestana : listaP) {
-        if (!pestana->getModoIncognito()) {
-            pestana->guardarPestana(handle);
-        }
-    }
-
-    handle.close();
-}
-
-// Implementación de leerNavegadorWeb
-void NavegadorWeb::leerNavegadorWeb(std::string& nombreArchivo) {
-    std::ifstream handle(nombreArchivo, std::ios::binary);
-
-    if (!handle.is_open()) {
-        std::cout << "Error al abrir el archivo '" << nombreArchivo << "'";
-        exit(EXIT_FAILURE);
-    }
-    //leer numero pestañas
-    size_t numPestanas;
-    handle.read(reinterpret_cast<char*>(&numPestanas), sizeof(numPestanas));
-    //leer cada pestaña
-    for (size_t i = 0; i < numPestanas; ++i) {
-        Pestana* pestana = new Pestana(false); // Inicializa con un valor por defecto
-        pestana->leerPestana(handle);
-        listaP.push_back(pestana);
-    }
-
-    handle.close();
-}
 
 std::ostream& operator<<(std::ostream& outp, const NavegadorWeb& n)
 {
@@ -134,3 +106,53 @@ std::ostream& operator<<(std::ostream& outp, const NavegadorWeb& n)
     }
     return outp;
 }
+
+
+
+//void NavegadorWeb::guardarNavegadorWeb(std::string& nombreArchivo) {
+//    // Abrir el archivo en modo binario y agregar datos al final
+//    std::ofstream handle(nombreArchivo, std::ios::binary | std::ios::trunc);
+//
+//    if (!handle.is_open()) {
+//        std::cerr << "Error al abrir el archivo '" << nombreArchivo << "'\n";
+//        return;
+//    }
+//
+//    size_t numPestanas = 0;
+//    for (const auto& pestana : listaP) {
+//        if (!pestana->getModoIncognito()) {
+//            ++numPestanas;
+//        }
+//    }
+//    // Guardar el número de pestañas que no están en modo incógnito
+//    handle.write(reinterpret_cast<char*>(&numPestanas), sizeof(numPestanas));
+//
+//    for (const auto& pestana : listaP) {
+//        if (!pestana->getModoIncognito()) {
+//            pestana->guardarPestana(handle);
+//        }
+//    }
+//
+//    handle.close();
+//}
+//
+//// Implementación de leerNavegadorWeb
+//void NavegadorWeb::leerNavegadorWeb(std::string& nombreArchivo) {
+//    std::ifstream handle(nombreArchivo, std::ios::binary);
+//
+//    if (!handle.is_open()) {
+//        std::cout << "Error al abrir el archivo '" << nombreArchivo << "'";
+//        exit(EXIT_FAILURE);
+//    }
+//    //leer numero pestañas
+//    size_t numPestanas;
+//    handle.read(reinterpret_cast<char*>(&numPestanas), sizeof(numPestanas));
+//    //leer cada pestaña
+//    for (size_t i = 0; i < numPestanas; ++i) {
+//        Pestana* pestana = new Pestana(false); // Inicializa con un valor por defecto
+//        pestana->leerPestana(handle);
+//        listaP.push_back(pestana);
+//    }
+//
+//    handle.close();
+//}

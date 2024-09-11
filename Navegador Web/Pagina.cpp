@@ -40,50 +40,6 @@ void Pagina::agregarEtiqueta(std::string tag)
     marcador->agregarEtiqueta(tag);
 }
 
-void Pagina::guardarPagina(std::ofstream& handle)
-{
-    // Guardar el título
-    size_t tituloSize = titulo.size();
-    handle.write(reinterpret_cast<char*>(&tituloSize), sizeof(tituloSize));
-    handle.write(titulo.c_str(), tituloSize);
-
-    // Guardar la URL
-    size_t URLSize = URL.size();
-    handle.write(reinterpret_cast<char*>(&URLSize), sizeof(URLSize));
-    handle.write(URL.c_str(), URLSize);
-
-    // Guardar el marcador si existe
-    bool hasMarcador = (marcador != nullptr);
-    handle.write(reinterpret_cast<char*>(&hasMarcador), sizeof(hasMarcador));
-    if (hasMarcador) {
-        marcador->guardarMarcador(handle);
-    }
-}
-
-void Pagina::leerPagina(std::ifstream& handle){
-
-    // Leer el título
-    size_t tituloSize;
-    handle.read(reinterpret_cast<char*>(&tituloSize), sizeof(tituloSize));
-    titulo.resize(tituloSize);
-    handle.read(&titulo[0], tituloSize);
-
-    // Leer la URL
-    size_t URLSize;
-    handle.read(reinterpret_cast<char*>(&URLSize), sizeof(URLSize));
-    URL.resize(URLSize);
-    handle.read(&URL[0], URLSize);
-
-    // Leer el marcador si existe
-    bool hasMarcador;
-    handle.read(reinterpret_cast<char*>(&hasMarcador), sizeof(hasMarcador));
-    if (hasMarcador) {
-        if (marcador == nullptr) {
-            marcador = new Marcador();
-        }
-        marcador->leerMarcador(handle);
-    }
-}
 
 Pagina& Pagina::operator=(const Pagina& p)
 {
@@ -109,3 +65,50 @@ std::ostream& operator<<(std::ostream& outp, const Pagina& p)
     outp << p.getTitulo() << "\n" << p.getURL();
     return outp;
 }
+
+
+//
+//void Pagina::guardarPagina(std::ofstream& handle)
+//{
+//    // Guardar el título
+//    size_t tituloSize = titulo.size();
+//    handle.write(reinterpret_cast<char*>(&tituloSize), sizeof(tituloSize));
+//    handle.write(titulo.c_str(), tituloSize);
+//
+//    // Guardar la URL
+//    size_t URLSize = URL.size();
+//    handle.write(reinterpret_cast<char*>(&URLSize), sizeof(URLSize));
+//    handle.write(URL.c_str(), URLSize);
+//
+//    // Guardar el marcador si existe
+//    bool hasMarcador = (marcador != nullptr);
+//    handle.write(reinterpret_cast<char*>(&hasMarcador), sizeof(hasMarcador));
+//    if (hasMarcador) {
+//        marcador->guardarMarcador(handle);
+//    }
+//}
+//
+//void Pagina::leerPagina(std::ifstream& handle){
+//
+//    // Leer el título
+//    size_t tituloSize;
+//    handle.read(reinterpret_cast<char*>(&tituloSize), sizeof(tituloSize));
+//    titulo.resize(tituloSize);
+//    handle.read(&titulo[0], tituloSize);
+//
+//    // Leer la URL
+//    size_t URLSize;
+//    handle.read(reinterpret_cast<char*>(&URLSize), sizeof(URLSize));
+//    URL.resize(URLSize);
+//    handle.read(&URL[0], URLSize);
+//
+//    // Leer el marcador si existe
+//    bool hasMarcador;
+//    handle.read(reinterpret_cast<char*>(&hasMarcador), sizeof(hasMarcador));
+//    if (hasMarcador) {
+//        if (marcador == nullptr) {
+//            marcador = new Marcador();
+//        }
+//        marcador->leerMarcador(handle);
+//    }
+//}
