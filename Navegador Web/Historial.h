@@ -14,6 +14,8 @@ public:
     void navegarAtras();
     void navegarAdelante();
     const std::list<Pagina*>& obtenerListaPaginas() const;
+    bool eliminarPáginas(const std::string& criterio);
+    Pagina* buscarPáginas(const std::string& criterio);
     //Metodo del marcadores
     void agregarMarcador(Marcador*);
     void agregarEtiqueta(std::string);

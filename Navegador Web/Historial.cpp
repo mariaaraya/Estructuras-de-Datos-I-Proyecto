@@ -101,3 +101,23 @@ std::ostream& operator<<(std::ostream& outp, const Historial& h)
 //		listaP.push_back(pagina);
 //	}
 //}
+Pagina* Historial::buscarPáginas(const std::string& criterio) { //puede ser por título o URL
+	for (Pagina* pagina : listaP) {
+		if (pagina->getTitulo() == criterio || pagina->getURL() == criterio) {
+			return pagina;
+		}
+	}
+	return nullptr;
+}
+
+//Era eliminar una pagina o todas????
+bool Historial::eliminarPáginas(const std::string& criterio) { //puede ser por título o URL
+	for (auto it = listaP.begin(); it != listaP.end(); ++it) {
+		if ((*it)->getTitulo() == criterio || (*it)->getURL() == criterio) {
+			delete* it;  // Elimina la página de la memoria
+			listaP.erase(it);  // Elimina la página de la lista
+			return true;  // Página eliminada con éxito
+		}
+	}
+	return false;
+}
