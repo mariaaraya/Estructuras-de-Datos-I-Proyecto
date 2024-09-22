@@ -22,6 +22,9 @@ public:
 	void PnavegarAdelante();
 	void PnavegarAtras();
 	bool visitarPagina(std::string);
+	//Metodos Paginas
+	bool eliminarPagina(const std::string& criterio);
+	Pagina* buscarPagina(const std::string& criterio);
 
 	friend std::ostream& operator<<(std::ostream&, const NavegadorWeb&);
 private:

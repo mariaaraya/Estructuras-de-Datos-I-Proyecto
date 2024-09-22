@@ -96,6 +96,22 @@ bool NavegadorWeb::visitarPagina(std::string p)
     return false;
 }
 
+bool NavegadorWeb::eliminarPagina(const std::string& criterio)
+{
+    if (PestanaActiva != listaP.end()) {
+        return (*PestanaActiva)->getHistorial()->eliminarPáginas(criterio);
+    }
+    return false;
+}
+
+Pagina* NavegadorWeb::buscarPagina(const std::string& criterio)
+{
+    if (PestanaActiva != listaP.end()) {
+        return (*PestanaActiva)->getHistorial()->buscarPáginas(criterio);
+    }
+    return nullptr;
+}
+
 
 std::ostream& operator<<(std::ostream& outp, const NavegadorWeb& n)
 {

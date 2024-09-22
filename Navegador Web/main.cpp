@@ -24,7 +24,26 @@ int main() {
     navegador->mostrarPestanaActiva();
     navegador->navegarArriba();
     navegador->mostrarPestanaActiva();
-    std::cout << "Pagina Activa: \n" << *navegador->obtenerPaginaActiva();
+    std::cout << "Pagina Activa: \n" << *navegador->obtenerPaginaActiva()<<std::endl;
+
+    std::string paginaBuscar = "Yahoo";
+    Pagina* paginaEncontrada = navegador->buscarPagina(paginaBuscar);
+    if (paginaEncontrada) {
+        std::cout << "Pagina encontrada: " << *paginaEncontrada << std::endl;
+    }
+    else {
+        std::cout << "Pagina no encontrada" << std::endl;
+    }
+
+    std::string paginaEliminar = "Tumblr";
+    bool eliminada = navegador->eliminarPagina(paginaEliminar);
+    if (eliminada) {
+        std::cout << "Pagina " << paginaEliminar << " eliminada con exito" << std::endl;
+    }
+    else {
+        std::cout << "Pagina " << paginaEliminar << " no eliminada" << std::endl;
+    }
+
 
     std::cout << "\n Historial: \n" << *navegador->obtenerPestanaActiva()->getHistorial();
     // Guardar el estado del navegador en un archivo
