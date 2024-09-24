@@ -1,6 +1,8 @@
 #pragma once
 #include "Clases.h"
 
+class NavegadorWeb;
+
 class GestorArchivos
 {
 public:

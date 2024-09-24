@@ -6,6 +6,12 @@ int main() {
     GestorArchivos arc;
     NavegadorWeb* navegador = new NavegadorWeb();
 
+
+    // Configurar el historial del navegador
+    int limiteHistorial = 3;  // Límite de 3 entradas en el historial
+    int tiempoLimpiar = 1;    // Tiempo para limpiar entradas viejas en días (1 día de antigüedad)
+    navegador->configurarHistorial(limiteHistorial, tiempoLimpiar);
+
     //  Agregar algunas pestañas con páginas
     Historial* historial1 = new Historial();
     navegador->agregarPestana(false);
@@ -24,7 +30,7 @@ int main() {
     navegador->mostrarPestanaActiva();
     navegador->navegarArriba();
     navegador->mostrarPestanaActiva();
-    std::cout << "Pagina Activa: \n" << *navegador->obtenerPaginaActiva()<<std::endl;
+    std::cout << "Pagina Activa: \n" << *navegador->obtenerPaginaActiva() << std::endl;
 
     std::string paginaBuscar = "Yahoo";
     Pagina* paginaEncontrada = navegador->buscarPagina(paginaBuscar);
@@ -45,7 +51,15 @@ int main() {
     }
 
 
-    std::cout << "\n Historial: \n" << *navegador->obtenerPestanaActiva()->getHistorial();
+    std::cout << "\n Historial antes de aplicar politicas: \n"
+        << *navegador->obtenerPestanaActiva()->getHistorial();
+
+    // Aplicar políticas
+    navegador->aplicarPoliticasHistorial();
+
+    std::cout << "\n Historial después de aplicar politicas: \n"
+        << *navegador->obtenerPestanaActiva()->getHistorial();
+
     // Guardar el estado del navegador en un archivo
     std::string nombreArchivo = "navegador.bin";
     arc.Guardar(nombreArchivo, navegador);

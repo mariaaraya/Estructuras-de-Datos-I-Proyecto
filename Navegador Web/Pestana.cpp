@@ -1,9 +1,9 @@
 #include "Pestana.h"
 
-Pestana::Pestana(bool modo) :modoIncognito(modo), historial(new Historial) {}
+Pestana::Pestana(bool modo) :modoIncognito(modo), historial(new Historial), fechaVisita(std::chrono::system_clock::now()) {}
 
 Pestana::Pestana(bool modo, Historial* historial)
-	:modoIncognito(modo), historial(historial) {}
+	:modoIncognito(modo), historial(historial), fechaVisita(std::chrono::system_clock::now()) {}
 
 Pestana::~Pestana() {
 	delete historial;
@@ -39,7 +39,9 @@ void Pestana::PagregarEtiqueta(std::string etiqueta)
 	historial->agregarEtiqueta(etiqueta);
 }
 
-
+std::chrono::system_clock::time_point Pestana::getFechaVisita() const {
+	return fechaVisita;
+}
 
 std::ostream& operator<<(std::ostream& outp, const Pestana& pestana)
 {

@@ -1,4 +1,6 @@
 #pragma once
+#include "Libreria.h"
+
 class Configuracion
 {
 public:

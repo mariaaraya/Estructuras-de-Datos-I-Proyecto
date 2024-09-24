@@ -6,3 +6,4 @@
 #include "Pestana.h"
 #include "NavegadorWeb.h"
 #include "GestorArchivos.h"
+#include "Configuracion.h"

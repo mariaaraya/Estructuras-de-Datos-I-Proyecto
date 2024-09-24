@@ -1,6 +1,10 @@
 #include "NavegadorWeb.h"
 
-NavegadorWeb::NavegadorWeb() :PestanaActiva(listaP.end()), paginas(new VectorPaginas()) {}
+NavegadorWeb::NavegadorWeb() :PestanaActiva(listaP.end()), paginas(new VectorPaginas()), configuracion() {
+    configuracion.setLimiteHistorial(100);
+    configuracion.setTiempoLimpiar(30);
+    agregarPestana(false);
+}
 
 NavegadorWeb::~NavegadorWeb()
 {
@@ -27,7 +31,7 @@ void NavegadorWeb::agregarPestana(Pestana* p)
 
 Pagina* NavegadorWeb::obtenerPaginaActiva()
 {
-    if (PestanaActiva != listaP.end()) {
+    if (!listaP.empty() && PestanaActiva != listaP.end()) {
         return (*PestanaActiva)->getHistorial()->obtenerPaginaActiva();
     }
     return nullptr;
@@ -35,7 +39,7 @@ Pagina* NavegadorWeb::obtenerPaginaActiva()
 
 Pestana* NavegadorWeb::obtenerPestanaActiva()
 {
-    if (PestanaActiva != listaP.end()) {
+    if (!listaP.empty() && PestanaActiva != listaP.end()) {
         return *PestanaActiva;
     }
     return nullptr;
@@ -43,7 +47,12 @@ Pestana* NavegadorWeb::obtenerPestanaActiva()
 
 void NavegadorWeb::mostrarPestanaActiva()
 {
-    std::cout << **PestanaActiva << std::endl;
+    if (!listaP.empty() && PestanaActiva != listaP.end()) {
+        std::cout << **PestanaActiva << std::endl;
+    }
+    else {
+        std::cout << "No hay pestaña activa." << std::endl;
+    }
 }
 
 void NavegadorWeb::navegarArriba()
@@ -51,12 +60,18 @@ void NavegadorWeb::navegarArriba()
     if (PestanaActiva != listaP.begin()) {
         --PestanaActiva;
     }
+    else {
+        std::cout << "No se puede navegar más arriba." << std::endl;
+    }
 }
 
 void NavegadorWeb::navegarAbajo()
 {
     if (PestanaActiva != listaP.end() && std::next(PestanaActiva) != listaP.end()) {
         ++PestanaActiva;
+    }
+    else {
+        std::cout << "No se puede navegar más abajo." << std::endl;
     }
 }
 
@@ -91,7 +106,9 @@ bool NavegadorWeb::visitarPagina(std::string p)
     Pagina* aux = paginas->buscarPagina(p);
     if (aux) {
         Pagina* copiaAux = new Pagina(*aux);
-        return (*PestanaActiva)->visitarPagina(copiaAux);
+        bool r = (*PestanaActiva)->visitarPagina(copiaAux);
+        aplicarPoliticasHistorial();
+        return r;
     }
     return false;
 }
@@ -110,6 +127,31 @@ Pagina* NavegadorWeb::buscarPagina(const std::string& criterio)
         return (*PestanaActiva)->getHistorial()->buscarPáginas(criterio);
     }
     return nullptr;
+}
+
+void NavegadorWeb::configurarHistorial(int limite, int tiempoLimpiar)
+{
+    configuracion.setLimiteHistorial(limite);
+    configuracion.setTiempoLimpiar(tiempoLimpiar);
+}
+
+void NavegadorWeb::aplicarPoliticasHistorial() {
+
+    while (listaP.size() > configuracion.getLimiteHistorial()) {
+        listaP.pop_front(); // Elimina el primer elemento de la lista (más antiguo)
+    }
+    auto ahora = std::chrono::system_clock::now();
+    auto tiempoLimpiar = std::chrono::hours(configuracion.getTiempoLimpiar() * 24);
+
+    for (auto it = listaP.begin(); it != listaP.end();) {
+        // Obtener la fecha de visita de la página activa
+        if (std::chrono::duration_cast<std::chrono::hours>(ahora - (*it)->getFechaVisita()) > tiempoLimpiar) {
+            it = listaP.erase(it);
+        }
+        else {
+            ++it;
+        }
+    }
 }
 
 

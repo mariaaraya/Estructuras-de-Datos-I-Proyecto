@@ -1,4 +1,5 @@
 #include "GestorArchivos.h"
+#include "NavegadorWeb.h"
 
 void GestorArchivos::Guardar(const std::string nombreArchivo, NavegadorWeb* n) {
     std::ofstream handle(nombreArchivo, std::ios::binary);

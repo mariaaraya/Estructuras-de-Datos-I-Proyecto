@@ -21,11 +21,14 @@ public:
 	void PagregarMarcador(Marcador*);
 	void PagregarEtiqueta(std::string);
 
+	std::chrono::system_clock::time_point getFechaVisita() const;
+
 	friend std::ostream& operator<<(std::ostream& outp, const Pestana&);
 
 private:
 	bool  modoIncognito; // true es que si es modoIncognito
 	Historial* historial;
+	std::chrono::system_clock::time_point fechaVisita;
 };
 
 // Archivos binarios 

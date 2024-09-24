@@ -1,6 +1,6 @@
 #pragma once
-#include "Pestana.h"
-#include "VectorPaginas.h"
+#include "Clases.h"
+#include "Configuracion.h"
 
 class NavegadorWeb
 {
@@ -25,12 +25,16 @@ public:
 	//Metodos Paginas
 	bool eliminarPagina(const std::string& criterio);
 	Pagina* buscarPagina(const std::string& criterio);
+	//Metodos Configuracion
+	void configurarHistorial(int limite, int tiempoLimpiar);
+	void aplicarPoliticasHistorial();
 
 	friend std::ostream& operator<<(std::ostream&, const NavegadorWeb&);
 private:
 	std::list<Pestana*> listaP;
 	std::list<Pestana*>::iterator PestanaActiva;
 	VectorPaginas* paginas;
+	Configuracion configuracion;
 };
 
 // Archivos binarios 
