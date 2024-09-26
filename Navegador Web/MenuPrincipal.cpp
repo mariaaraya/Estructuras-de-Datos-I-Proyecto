@@ -17,15 +17,16 @@ int MenuPrincipal::menuPrincipal()
     std::cout << "[8] Salir\n";
     while (true) {
         int tecla = _getch(); // Captura la tecla presionada
-        if (tecla == 0 || tecla == 224) { // Detecta si es una tecla especial
+        if (tecla >= '1' && tecla <= '8') { // Verifica si la tecla es un número válido
+            opcion = tecla - '0'; // Convierte el carácter a número
+            break;
+        }
+        else if (tecla == 0 || tecla == 224) { // Detecta si es una tecla especial
             tecla = _getch(); // Captura el segundo carácter
             switch (tecla) {
             case 72: // Flecha arriba
-                return tecla;
             case 80: // Flecha abajo
-                return tecla;
             case 75: // Flecha izquierda
-                return tecla;
             case 77: // Flecha derecha
                 return tecla;
             default:
@@ -33,15 +34,12 @@ int MenuPrincipal::menuPrincipal()
             }
         }
         else {
-            std::cin.putback(tecla); // Devuelve el carácter al flujo de entrada
-            std::cin >> opcion; // Leer la entrada del usuario
-            if (std::cin.fail() || opcion <= 0) {
-                std::cin.clear();
-                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-            }
-                return opcion;
-            }
+            std::cout << "Opcion no valida. Por favor, ingrese un numero entre 1 y 8.\n";
+        }
     }
+    std::cout << opcion << std::endl;
+    return opcion;
+
 }
 
 std::string MenuPrincipal::URl()
@@ -191,6 +189,8 @@ void MenuPrincipal::salir()
 {
 	std::cout << "---------------------> C R E A D O R E S <---------------------\n\n";
 	std::cout << " Kendra Artavia Caballero.\n";
+    std::cout << " .\n";
+    std::cout << " .\n";
 	std::cout << "\n----------> G R A C I A S   P O R   U T I L I Z A R <----------\n";
 
 }

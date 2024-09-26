@@ -116,7 +116,7 @@ void Controler::MMarcador()
 /* Case 4*/
 void Controler::ModoIncognito()
 {
-	navegador->crearPestana(false);
+	navegador->crearPestana(true);
 }
 /* Case 5*/
 void Controler::Busqueda()
@@ -153,6 +153,8 @@ void Controler::Archivos()
 				Archivos2();
 				system("cls");
 				break;
+			case 3:
+				break;
 			default:
 				throw new ExcepcionFueraRango();
 				break;
@@ -169,7 +171,7 @@ void Controler::Archivos()
 			system("pause");
 			system("cls");
 		}
-	} while (opcion != 2);
+	} while (opcion != 3);
 }
 
 void Controler::Archivos1()

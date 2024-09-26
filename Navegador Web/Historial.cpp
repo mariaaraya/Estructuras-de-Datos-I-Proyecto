@@ -53,7 +53,7 @@ bool Historial::navegarAtras()
 
 bool Historial::navegarAdelante()
 {
-    if (std::next(PaginaActiva) != listaP.end()) {
+    if (PaginaActiva != listaP.begin() && std::next(PaginaActiva) != listaP.end()) {
         ++PaginaActiva;
         return true;
     }
