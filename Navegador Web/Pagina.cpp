@@ -1,12 +1,26 @@
 #include "Pagina.h"
 
+
 Pagina::Pagina(std::string titulo1, std::string url)
-    : titulo(titulo1), URL(url), marcador(nullptr) {}
+    : titulo(titulo1), URL(url), marcador(nullptr), fechaVisita(std::chrono::system_clock::now()) {
+    std::time_t fechaVisitaTimeT = std::chrono::system_clock::to_time_t(fechaVisita);
+    std::tm tm;
+    localtime_s(&tm, &fechaVisitaTimeT);
+
+}
 
 Pagina::Pagina(std::string titulo1, std::string url, Marcador* marca)
-    : titulo(titulo1), URL(url), marcador(marca) {}
+    : titulo(titulo1), URL(url), marcador(marca), fechaVisita(std::chrono::system_clock::now()) {
+    std::time_t fechaVisitaTimeT = std::chrono::system_clock::to_time_t(fechaVisita);
+    std::tm tm;
+    localtime_s(&tm, &fechaVisitaTimeT);
+}
 
 Pagina::Pagina(const Pagina& otra) : titulo(otra.titulo), URL(otra.URL) {
+    fechaVisita = std::chrono::system_clock::now();
+    std::time_t fechaVisitaTimeT = std::chrono::system_clock::to_time_t(fechaVisita);
+    std::tm tm;
+    localtime_s(&tm, &fechaVisitaTimeT);
     if (otra.marcador) {
         marcador = new Marcador(*otra.marcador); // Copia profunda del marcador
     }
@@ -35,9 +49,18 @@ void Pagina::setMarcador(Marcador* nuevoMarcador)
     marcador = nuevoMarcador;
 }
 
-void Pagina::agregarEtiqueta(std::string tag)
+bool Pagina::agregarEtiqueta(std::string tag)
 {
-    marcador->agregarEtiqueta(tag);
+    if (marcador) {
+        marcador->agregarEtiqueta(tag);
+        return true;
+    }
+    return false;
+}
+
+std::chrono::system_clock::time_point Pagina::getFechaVisita() const
+{
+    return fechaVisita;
 }
 
 
@@ -67,48 +90,3 @@ std::ostream& operator<<(std::ostream& outp, const Pagina& p)
 }
 
 
-//
-//void Pagina::guardarPagina(std::ofstream& handle)
-//{
-//    // Guardar el título
-//    size_t tituloSize = titulo.size();
-//    handle.write(reinterpret_cast<char*>(&tituloSize), sizeof(tituloSize));
-//    handle.write(titulo.c_str(), tituloSize);
-//
-//    // Guardar la URL
-//    size_t URLSize = URL.size();
-//    handle.write(reinterpret_cast<char*>(&URLSize), sizeof(URLSize));
-//    handle.write(URL.c_str(), URLSize);
-//
-//    // Guardar el marcador si existe
-//    bool hasMarcador = (marcador != nullptr);
-//    handle.write(reinterpret_cast<char*>(&hasMarcador), sizeof(hasMarcador));
-//    if (hasMarcador) {
-//        marcador->guardarMarcador(handle);
-//    }
-//}
-//
-//void Pagina::leerPagina(std::ifstream& handle){
-//
-//    // Leer el título
-//    size_t tituloSize;
-//    handle.read(reinterpret_cast<char*>(&tituloSize), sizeof(tituloSize));
-//    titulo.resize(tituloSize);
-//    handle.read(&titulo[0], tituloSize);
-//
-//    // Leer la URL
-//    size_t URLSize;
-//    handle.read(reinterpret_cast<char*>(&URLSize), sizeof(URLSize));
-//    URL.resize(URLSize);
-//    handle.read(&URL[0], URLSize);
-//
-//    // Leer el marcador si existe
-//    bool hasMarcador;
-//    handle.read(reinterpret_cast<char*>(&hasMarcador), sizeof(hasMarcador));
-//    if (hasMarcador) {
-//        if (marcador == nullptr) {
-//            marcador = new Marcador();
-//        }
-//        marcador->leerMarcador(handle);
-//    }
-//}

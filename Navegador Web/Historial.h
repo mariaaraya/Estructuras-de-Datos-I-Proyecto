@@ -11,21 +11,19 @@ public:
     void cambiarPagina(Pagina* p);
     Pagina* obtenerPaginaActiva();
     void mostrarPaginaActiva();
-    void navegarAtras();
-    void navegarAdelante();
+    bool navegarAtras();
+    bool navegarAdelante();
     const std::list<Pagina*>& obtenerListaPaginas() const;
-    bool eliminarPáginas(const std::string& criterio);
-    Pagina* buscarPáginas(const std::string& criterio);
-    //Metodo del marcadores
-    void agregarMarcador(Marcador*);
-    void agregarEtiqueta(std::string);
+    bool eliminarPaginaFrente();
     friend std::ostream& operator<<(std::ostream&, const Historial&);
+    //Metodo del marcadores
+    bool agregarMarcador(Marcador*);
+    bool agregarEtiqueta(std::string);
+    std::string buscarPaginas(const std::string&) const;
+    //Metodos de Configuracion
+    void aplicarPoliticasHistorial(int, int);
 private:
-    // Atributos estáticos para la lista de páginas y navegación
     std::list<Pagina*> listaP;
     std::list<Pagina*>::iterator PaginaActiva;
 };
 
-//// Archivos binarios 
-   //void guardarHistorial(std::ofstream&);
-   //void leerHistorial(std::ifstream&);

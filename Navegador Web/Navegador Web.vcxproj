@@ -128,10 +128,15 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Configuracion.cpp" />
+    <ClCompile Include="Controler.cpp" />
+    <ClCompile Include="ExcepcionCategoria.cpp" />
+    <ClCompile Include="ExcepcionFueraRango.cpp" />
     <ClCompile Include="GestorArchivos.cpp" />
     <ClCompile Include="Historial.cpp" />
+    <ClCompile Include="ListaPestana.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Marcador.cpp" />
+    <ClCompile Include="MenuPrincipal.cpp" />
     <ClCompile Include="NavegadorWeb.cpp" />
     <ClCompile Include="Pagina.cpp" />
     <ClCompile Include="Pestana.cpp" />
@@ -141,10 +146,16 @@
   <ItemGroup>
     <ClInclude Include="Clases.h" />
     <ClInclude Include="Configuracion.h" />
+    <ClInclude Include="Controler.h" />
+    <ClInclude Include="Excepcion.h" />
+    <ClInclude Include="ExcepcionCategoria.h" />
+    <ClInclude Include="ExcepcionFueraRango.h" />
     <ClInclude Include="GestorArchivos.h" />
     <ClInclude Include="Historial.h" />
     <ClInclude Include="Libreria.h" />
+    <ClInclude Include="ListaPestana.h" />
     <ClInclude Include="Marcador.h" />
+    <ClInclude Include="MenuPrincipal.h" />
     <ClInclude Include="NavegadorWeb.h" />
     <ClInclude Include="Pagina.h" />
     <ClInclude Include="Pestana.h" />

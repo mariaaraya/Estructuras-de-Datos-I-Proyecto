@@ -13,17 +13,19 @@ public:
 	void setHistorial(Historial*);
 	bool getModoIncognito();
 	void setModoIncognito(bool);
-	//Metodo del historial
-	void PnavegarAdelante();
-	void PnavegarAtras();
-	bool visitarPagina(Pagina*);
-	//Metodo del marcadores
-	void PagregarMarcador(Marcador*);
-	void PagregarEtiqueta(std::string);
-
-	std::chrono::system_clock::time_point getFechaVisita() const;
-
 	friend std::ostream& operator<<(std::ostream& outp, const Pestana&);
+	//Metodo del historial
+	bool PnavegarAdelante();
+	bool PnavegarAtras();
+	bool visitarPagina(Pagina*);
+	void mostarPagina();
+	//Metodo del marcadores
+	bool PagregarMarcador(Marcador*);
+	bool PagregarEtiqueta(std::string);
+	std::string PbuscarPaginas(const std::string&) const;
+	//Configuracion
+	void PaplicarPoliticasHistorial(int, int);
+
 
 private:
 	bool  modoIncognito; // true es que si es modoIncognito

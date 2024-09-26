@@ -13,35 +13,27 @@ Historial* Pestana::getHistorial() { return historial; }
 void Pestana::setHistorial(Historial* historial) { this->historial = historial; }
 bool Pestana::getModoIncognito() { return modoIncognito; }
 void Pestana::setModoIncognito(bool modo) { modoIncognito = modo; }
-void Pestana::PnavegarAdelante()
+
+bool Pestana::PnavegarAdelante()
 {
-	historial->navegarAdelante();
+	return historial->navegarAdelante();
 }
 
-void Pestana::PnavegarAtras()
+bool Pestana::PnavegarAtras()
 {
-	historial->navegarAtras();
+	return  historial->navegarAtras();
 }
 
 bool Pestana::visitarPagina(Pagina* aux)
 {
-	historial->agregarPagina(aux);
-	return true;
+	return historial->agregarPagina(aux);
 }
 
-void Pestana::PagregarMarcador(Marcador* marcador)
+void Pestana::mostarPagina()
 {
-	historial->agregarMarcador(marcador);
+	historial->mostrarPaginaActiva();
 }
 
-void Pestana::PagregarEtiqueta(std::string etiqueta)
-{
-	historial->agregarEtiqueta(etiqueta);
-}
-
-std::chrono::system_clock::time_point Pestana::getFechaVisita() const {
-	return fechaVisita;
-}
 
 std::ostream& operator<<(std::ostream& outp, const Pestana& pestana)
 {
@@ -49,31 +41,32 @@ std::ostream& operator<<(std::ostream& outp, const Pestana& pestana)
 	return outp;
 }
 
-//void Pestana::guardarPestana(std::ofstream& handle)
-//{ 
-//	// Guardar el modo incognito
-//	handle.write(reinterpret_cast<char*>(&modoIncognito), sizeof(modoIncognito));
-//
-//	// Guardar el historial
-//	bool hasHistorial = (historial != nullptr);
-//	handle.write(reinterpret_cast<char*>(&hasHistorial), sizeof(hasHistorial));
-//	if (hasHistorial) {
-//		historial->guardarHistorial(handle);
-//	}
-//}
-//
-//void Pestana::leerPestana(std::ifstream& handle)
-//{ 
-//	// Leer el modo incognito
-//	handle.read(reinterpret_cast<char*>(&modoIncognito), sizeof(modoIncognito));
-//
-//	// Leer el historial
-//	bool hasHistorial;
-//	handle.read(reinterpret_cast<char*>(&hasHistorial), sizeof(hasHistorial));
-//	if (hasHistorial) {
-//		if (historial == nullptr) {
-//			historial = new Historial();
-//		}
-//		historial->leerHistorial(handle);
-//	}
-//}
+/*----------*/
+
+/*------------------------Marcador------------------------*/
+
+
+bool Pestana::PagregarMarcador(Marcador* marcador)
+{
+	return historial->agregarMarcador(marcador);
+}
+
+bool Pestana::PagregarEtiqueta(std::string etiqueta)
+{
+	return historial->agregarEtiqueta(etiqueta);
+}
+
+std::string Pestana::PbuscarPaginas(const std::string& marcador) const
+{
+	return historial->buscarPaginas(marcador);
+}
+
+
+/*-------------------Configuracion------------------------*/
+
+
+void Pestana::PaplicarPoliticasHistorial(int limite, int tie)
+{
+	historial->aplicarPoliticasHistorial(limite, tie);
+}
+

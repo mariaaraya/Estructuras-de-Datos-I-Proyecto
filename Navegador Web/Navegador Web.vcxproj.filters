@@ -13,32 +13,56 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Archivos de encabezado\Pagina">
-      <UniqueIdentifier>{60719488-7092-41f9-908d-736e7e91c40c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Archivos de origen\Pagina">
-      <UniqueIdentifier>{e85d0556-c215-4cff-9481-ed924b8a5306}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Archivos de encabezado\Marcador">
-      <UniqueIdentifier>{a4ab8b79-8346-46f4-a020-85b0bda60beb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Archivos de origen\Marcador">
-      <UniqueIdentifier>{054bcd66-8b38-41e7-9155-ba3949520c33}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Archivos de encabezado\Historial">
-      <UniqueIdentifier>{65122b02-f653-4e77-898b-ab0f64fdcc29}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Archivos de origen\Historial">
-      <UniqueIdentifier>{c0804463-172b-4895-8e9f-d9897ac8a0c3}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Archivos de encabezado\Otro">
       <UniqueIdentifier>{6e5b893d-3952-4ff2-88b0-0cc9ac06f41e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Archivos de encabezado\NavegadorWeb">
-      <UniqueIdentifier>{c1121b9d-3d21-4881-9d26-5067c7a3f3aa}</UniqueIdentifier>
+    <Filter Include="Archivos de encabezado\Configuracion">
+      <UniqueIdentifier>{7e7cc37e-d3e7-4a29-9eb4-737a524492dd}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Archivos de origen\NavegadorWeb">
-      <UniqueIdentifier>{8108b6ab-24c1-4fd5-88a3-f6381297697f}</UniqueIdentifier>
+    <Filter Include="Archivos de origen\Configuracion">
+      <UniqueIdentifier>{e2e2dd57-ccfe-4092-80b9-136dd6cb81ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\Navegador">
+      <UniqueIdentifier>{65122b02-f653-4e77-898b-ab0f64fdcc29}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\Navegador">
+      <UniqueIdentifier>{90231117-c3b1-41bf-b1b3-f6bcd68ca6d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\Navegador\Historial">
+      <UniqueIdentifier>{c0804463-172b-4895-8e9f-d9897ac8a0c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\Navegador\Historial\Pagina">
+      <UniqueIdentifier>{e85d0556-c215-4cff-9481-ed924b8a5306}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\Navegador\Historial\Pagina\Marcador">
+      <UniqueIdentifier>{054bcd66-8b38-41e7-9155-ba3949520c33}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\Navegador\Historial">
+      <UniqueIdentifier>{ce1ae1ac-d941-4198-9f0e-4c9f597a01d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\Navegador\Historial\Pagina">
+      <UniqueIdentifier>{60719488-7092-41f9-908d-736e7e91c40c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\Navegador\Historial\Pagina\Marcador">
+      <UniqueIdentifier>{a4ab8b79-8346-46f4-a020-85b0bda60beb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\Navegador\ListaPestana">
+      <UniqueIdentifier>{3215a241-8779-4f2a-b890-fcf9911e3452}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\Navegador\ListaPestana">
+      <UniqueIdentifier>{e3c7121b-8a70-453e-b8fe-943cd0a77bb0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\Menu">
+      <UniqueIdentifier>{8a658c88-17c9-4822-9e8f-5302cd00bcb1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\Menu">
+      <UniqueIdentifier>{8c4d01d8-edb6-49ce-8dab-c53e9f6d9fe0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\Excepcion">
+      <UniqueIdentifier>{d78b126a-7974-400c-9863-ae2d09fd2141}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\Excepcion">
+      <UniqueIdentifier>{d2cc086c-232b-4ada-afc4-1f7b296697b5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -46,48 +70,57 @@
       <Filter>Archivos de origen</Filter>
     </ClCompile>
     <ClCompile Include="Pagina.cpp">
-      <Filter>Archivos de origen\Pagina</Filter>
+      <Filter>Archivos de origen\Navegador\Historial\Pagina</Filter>
     </ClCompile>
     <ClCompile Include="Marcador.cpp">
-      <Filter>Archivos de origen\Marcador</Filter>
+      <Filter>Archivos de origen\Navegador\Historial\Pagina\Marcador</Filter>
     </ClCompile>
     <ClCompile Include="VectorMarcador.cpp">
-      <Filter>Archivos de origen\Marcador</Filter>
-    </ClCompile>
-    <ClCompile Include="Historial.cpp">
-      <Filter>Archivos de origen\Historial</Filter>
+      <Filter>Archivos de origen\Navegador\Historial\Pagina\Marcador</Filter>
     </ClCompile>
     <ClCompile Include="Configuracion.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="Pestana.cpp">
-      <Filter>Archivos de origen\Historial</Filter>
-    </ClCompile>
-    <ClCompile Include="NavegadorWeb.cpp">
-      <Filter>Archivos de origen\NavegadorWeb</Filter>
-    </ClCompile>
-    <ClCompile Include="VectorPaginas.cpp">
-      <Filter>Archivos de origen\NavegadorWeb</Filter>
+      <Filter>Archivos de origen\Configuracion</Filter>
     </ClCompile>
     <ClCompile Include="GestorArchivos.cpp">
-      <Filter>Archivos de origen</Filter>
+      <Filter>Archivos de origen\Configuracion</Filter>
+    </ClCompile>
+    <ClCompile Include="VectorPaginas.cpp">
+      <Filter>Archivos de origen\Configuracion</Filter>
+    </ClCompile>
+    <ClCompile Include="Historial.cpp">
+      <Filter>Archivos de origen\Navegador\Historial</Filter>
+    </ClCompile>
+    <ClCompile Include="Pestana.cpp">
+      <Filter>Archivos de origen\Navegador\ListaPestana</Filter>
+    </ClCompile>
+    <ClCompile Include="ExcepcionCategoria.cpp">
+      <Filter>Archivos de origen\Excepcion</Filter>
+    </ClCompile>
+    <ClCompile Include="ExcepcionFueraRango.cpp">
+      <Filter>Archivos de origen\Excepcion</Filter>
+    </ClCompile>
+    <ClCompile Include="ListaPestana.cpp">
+      <Filter>Archivos de origen\Navegador\ListaPestana</Filter>
+    </ClCompile>
+    <ClCompile Include="NavegadorWeb.cpp">
+      <Filter>Archivos de origen\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuPrincipal.cpp">
+      <Filter>Archivos de origen\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="Controler.cpp">
+      <Filter>Archivos de origen\Menu</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Pagina.h">
-      <Filter>Archivos de encabezado\Pagina</Filter>
+      <Filter>Archivos de encabezado\Navegador\Historial\Pagina</Filter>
     </ClInclude>
     <ClInclude Include="Marcador.h">
-      <Filter>Archivos de encabezado\Marcador</Filter>
+      <Filter>Archivos de encabezado\Navegador\Historial\Pagina\Marcador</Filter>
     </ClInclude>
     <ClInclude Include="VectorMarcador.h">
-      <Filter>Archivos de encabezado\Marcador</Filter>
-    </ClInclude>
-    <ClInclude Include="Historial.h">
-      <Filter>Archivos de encabezado\Historial</Filter>
-    </ClInclude>
-    <ClInclude Include="Configuracion.h">
-      <Filter>Archivos de encabezado</Filter>
+      <Filter>Archivos de encabezado\Navegador\Historial\Pagina\Marcador</Filter>
     </ClInclude>
     <ClInclude Include="Libreria.h">
       <Filter>Archivos de encabezado\Otro</Filter>
@@ -95,17 +128,41 @@
     <ClInclude Include="Clases.h">
       <Filter>Archivos de encabezado\Otro</Filter>
     </ClInclude>
-    <ClInclude Include="Pestana.h">
-      <Filter>Archivos de encabezado\Historial</Filter>
-    </ClInclude>
-    <ClInclude Include="NavegadorWeb.h">
-      <Filter>Archivos de encabezado\NavegadorWeb</Filter>
-    </ClInclude>
-    <ClInclude Include="VectorPaginas.h">
-      <Filter>Archivos de encabezado\NavegadorWeb</Filter>
+    <ClInclude Include="Configuracion.h">
+      <Filter>Archivos de encabezado\Configuracion</Filter>
     </ClInclude>
     <ClInclude Include="GestorArchivos.h">
-      <Filter>Archivos de encabezado</Filter>
+      <Filter>Archivos de encabezado\Configuracion</Filter>
+    </ClInclude>
+    <ClInclude Include="VectorPaginas.h">
+      <Filter>Archivos de encabezado\Configuracion</Filter>
+    </ClInclude>
+    <ClInclude Include="Historial.h">
+      <Filter>Archivos de encabezado\Navegador\Historial</Filter>
+    </ClInclude>
+    <ClInclude Include="Pestana.h">
+      <Filter>Archivos de encabezado\Navegador\ListaPestana</Filter>
+    </ClInclude>
+    <ClInclude Include="Excepcion.h">
+      <Filter>Archivos de encabezado\Excepcion</Filter>
+    </ClInclude>
+    <ClInclude Include="ExcepcionCategoria.h">
+      <Filter>Archivos de encabezado\Excepcion</Filter>
+    </ClInclude>
+    <ClInclude Include="ExcepcionFueraRango.h">
+      <Filter>Archivos de encabezado\Excepcion</Filter>
+    </ClInclude>
+    <ClInclude Include="ListaPestana.h">
+      <Filter>Archivos de encabezado\Navegador\ListaPestana</Filter>
+    </ClInclude>
+    <ClInclude Include="NavegadorWeb.h">
+      <Filter>Archivos de encabezado\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuPrincipal.h">
+      <Filter>Archivos de encabezado\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="Controler.h">
+      <Filter>Archivos de encabezado\Menu</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

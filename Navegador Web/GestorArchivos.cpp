@@ -1,7 +1,7 @@
 #include "GestorArchivos.h"
 #include "NavegadorWeb.h"
 
-void GestorArchivos::Guardar(const std::string nombreArchivo, NavegadorWeb* n) {
+void GestorArchivos::Guardar(const std::string nombreArchivo, ListaPestana* n) {
     std::ofstream handle(nombreArchivo, std::ios::binary);
 
     if (!handle.is_open()) {
@@ -99,7 +99,7 @@ void GestorArchivos::Guardar(const std::string nombreArchivo, NavegadorWeb* n) {
     handle.close();
 }
 
-void GestorArchivos::Leer(const std::string nombreArchivo, NavegadorWeb* n)
+void GestorArchivos::Leer(const std::string nombreArchivo, ListaPestana* n)
 {
     std::ifstream handle(nombreArchivo, std::ios::binary);
 

@@ -1,3 +1,4 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include "Historial.h"
 
 Historial::Historial() : PaginaActiva(listaP.end()) {}
@@ -39,36 +40,49 @@ void Historial::mostrarPaginaActiva()
 	std::cout << **PaginaActiva << std::endl;
 }
 
-void Historial::navegarAtras()
+bool Historial::navegarAtras()
 {
-	if (PaginaActiva != listaP.begin()) {
-		--PaginaActiva;
-	}
+    if (PaginaActiva != listaP.begin()) {
+        --PaginaActiva;
+        return true;
+    }
+    return false;
 }
 
-void Historial::navegarAdelante()
+
+
+bool Historial::navegarAdelante()
 {
-	if (PaginaActiva != listaP.end() && std::next(PaginaActiva) != listaP.end()) {
-		++PaginaActiva;
-	}
+    if (std::next(PaginaActiva) != listaP.end()) {
+        ++PaginaActiva;
+        return true;
+    }
+    return false;
 }
 
 const std::list<Pagina*>& Historial::obtenerListaPaginas() const
 {
-	return listaP;
+    return listaP;
 }
 
-void Historial::agregarMarcador(Marcador* marcador)
+bool Historial::eliminarPaginaFrente()
 {
-	(*PaginaActiva)->setMarcador(marcador);
+	if (!listaP.empty()) {
+		if (PaginaActiva == listaP.begin()) {
+			// Mover la página activa a la siguiente página antes de eliminar la actual
+			PaginaActiva = std::next(listaP.begin());
+		}
+		Pagina* pagina = listaP.front();
+		listaP.pop_front();
+		delete pagina;
+		// Si la lista está vacía después de eliminar, ajustar PaginaActiva
+		if (listaP.empty()) {
+			PaginaActiva = listaP.end();
+		}
+		return true;
+	}
+	return false;
 }
-
-void Historial::agregarEtiqueta(std::string etiqueta)
-{
-	(*PaginaActiva)->agregarEtiqueta(etiqueta);
-}
-
-
 
 std::ostream& operator<<(std::ostream& outp, const Historial& h)
 {
@@ -78,46 +92,73 @@ std::ostream& operator<<(std::ostream& outp, const Historial& h)
 	return outp;
 }
 
-//void Historial::guardarHistorial(std::ofstream& handle)
-//{
-//	// Guardar el número de páginas
-//	size_t numPaginas = listaP.size();
-//	handle.write(reinterpret_cast<char*>(&numPaginas), sizeof(numPaginas));
-//
-//	// Guardar cada página
-//	for (const auto& pagina : listaP) {
-//		pagina->guardarPagina(handle);
-//	}
-//}
-//
-//void Historial::leerHistorial(std::ifstream& handle)
-//{
-//	size_t numPaginas;
-//	handle.read(reinterpret_cast<char*>(&numPaginas), sizeof(numPaginas));
-//
-//	for (size_t i = 0; i < numPaginas; ++i) {
-//		Pagina* pagina = new Pagina();
-//		pagina->leerPagina(handle);
-//		listaP.push_back(pagina);
-//	}
-//}
-Pagina* Historial::buscarPáginas(const std::string& criterio) { //puede ser por título o URL
-	for (Pagina* pagina : listaP) {
-		if (pagina->getTitulo() == criterio || pagina->getURL() == criterio) {
-			return pagina;
-		}
-	}
-	return nullptr;
+
+
+/*==========================================*/
+bool Historial::agregarMarcador(Marcador* marcador)
+{
+    if (PaginaActiva != listaP.end()) {
+        (*PaginaActiva)->setMarcador(marcador);
+        return true;
+    }
+    return false;
 }
 
-//Era eliminar una pagina o todas????
-bool Historial::eliminarPáginas(const std::string& criterio) { //puede ser por título o URL
-	for (auto it = listaP.begin(); it != listaP.end(); ++it) {
-		if ((*it)->getTitulo() == criterio || (*it)->getURL() == criterio) {
-			delete* it;  // Elimina la página de la memoria
-			listaP.erase(it);  // Elimina la página de la lista
-			return true;  // Página eliminada con éxito
-		}
-	}
-	return false;
+
+bool Historial::agregarEtiqueta(std::string etiqueta)
+{
+    if (PaginaActiva != listaP.end()) {
+        return (*PaginaActiva)->agregarEtiqueta(etiqueta);
+    }
+    return false;
+}
+
+
+
+std::string Historial::buscarPaginas(const std::string& nombreMarcador) const
+{
+    std::ostringstream oss;
+    bool found = false;
+    for (const auto& pagina : listaP) {
+        if (pagina->getMarcador() && pagina->getMarcador()->getNombre() == nombreMarcador) {
+            oss << *pagina << std::endl;
+            found = true;
+
+        }
+    }
+    return found ? oss.str() : "No se encontraron páginas con el marcador especificado.";
+}
+
+
+/*+++++++++++++++++++++Configuracion+++++++++++++++++++++++++++++++++++*/
+void Historial::aplicarPoliticasHistorial(int limiteHistorial, int TiempoLimpiar)
+{
+    while (listaP.size() > limiteHistorial) {
+        eliminarPaginaFrente();
+        std::cout << "lo elimmo";
+    }
+    auto ahora = std::chrono::system_clock::now();
+    auto tiempoLimpiar = std::chrono::hours(TiempoLimpiar * 24);
+
+    for (auto it = listaP.begin(); it != listaP.end();) {
+        auto fechaVisita = (*it)->getFechaVisita();
+        auto tiempoVisita = std::chrono::duration_cast<std::chrono::hours>(ahora - fechaVisita);
+
+        std::time_t fechaVisitaTimeT = std::chrono::system_clock::to_time_t(fechaVisita);
+        std::tm* tm = std::localtime(&fechaVisitaTimeT);
+        std::cout << "Fecha de visita: " << std::put_time(tm, "%Y-%m-%d %H:%M:%S") << '\n';
+        std::cout << "Tiempo desde la visita: " << tiempoVisita.count() << " horas\n";
+
+        if (tiempoVisita > tiempoLimpiar) {
+            if (PaginaActiva == it) {
+                PaginaActiva = std::next(it);
+                std::cout << "lo elimmo";
+            }
+            it = listaP.erase(it);
+            std::cout << "lo elimmo";
+        }
+        else {
+            ++it;
+        }
+    }
 }

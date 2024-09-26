@@ -1,42 +1,51 @@
 #pragma once
 #include "Clases.h"
-#include "Configuracion.h"
+
 
 class NavegadorWeb
 {
 public:
-	NavegadorWeb();
 	virtual~NavegadorWeb();
-	bool agregarPestana(bool);
-	void agregarPestana(Pestana*);
-	Pagina* obtenerPaginaActiva();
-	Pestana* obtenerPestanaActiva();
-	void mostrarPestanaActiva();
-	void navegarArriba();
-	void navegarAbajo();
-	const std::list<Pestana*>& obtenerListaPestanas() const;
-	//Metodo del marcadores
-	void agregarMarcador(Marcador*);
-	void agregarEtiqueta(std::string);
-	//Metodos de Pestana
-	void PnavegarAdelante();
-	void PnavegarAtras();
+	/*Get del NavegarWeb*/
+	static NavegadorWeb& getNavegadorWeb();
+	/*----Historial de navegación----*/
+	bool navegar(int);
+	/*----Administrador de pestañas----*/
+	// 1- Creacion de paginas y pestañas
 	bool visitarPagina(std::string);
-	//Metodos Paginas
-	bool eliminarPagina(const std::string& criterio);
-	Pagina* buscarPagina(const std::string& criterio);
-	//Metodos Configuracion
-	void configurarHistorial(int limite, int tiempoLimpiar);
-	void aplicarPoliticasHistorial();
-
-	friend std::ostream& operator<<(std::ostream&, const NavegadorWeb&);
+	void crearPestana(bool); // Metodo tambien usado para creacion de pestaña incognita
+	// 2- Mostare la pagina activa o el historial de la pestana
+	void mostarPaginaActiva();
+	void mostarHistorial();
+	// 3- Configuracion
+	void actualizarConfiguracion(Configuracion*);
+	/*----Sistema de marcadores----*/
+	// 1- Agregar marcador
+	bool agregarMarcador(Marcador*);
+	// 2- Agregar etiquetas
+    bool agracarEtiqueta(const  std::string);
+	// 3- Busqueda de marcador
+	std::string busquedaMarcador(const std::string&)const;
+	/*----Búsqueda y filtrado de historial----*/
+	// 1- Guardar
+	void guardarSeccion(const std::string);
+	// 2- Cargar una seccion
+	void cargarSeccion(const std::string);
+	/*----Navegación privada----*/
+	 //1- Crear Pestaña incognito
+	// meto en  Administrador de pestañas
+	/*----Políticas de administración del historial----*/
+	 //Configurar Configuracion ??
+	 //-Limitacion de entras
+	 //-Limpiar por tiempo 
+	 //Realiza en aregar y mostrar 
 private:
-	std::list<Pestana*> listaP;
-	std::list<Pestana*>::iterator PestanaActiva;
-	VectorPaginas* paginas;
-	Configuracion configuracion;
+	NavegadorWeb();
+	static NavegadorWeb* navegadorWeb;
+	VectorPaginas* csvpaginas;
+	ListaPestana* pestanaLista;
+	Configuracion* configuracion;
+	GestorArchivos* archivos;
 };
 
-// Archivos binarios 
-	/*void guardarNavegadorWeb(std::string&);
-	void leerNavegadorWeb(std::string&);*/
+

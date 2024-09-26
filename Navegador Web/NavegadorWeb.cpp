@@ -1,216 +1,144 @@
 #include "NavegadorWeb.h"
 
-NavegadorWeb::NavegadorWeb() :PestanaActiva(listaP.end()), paginas(new VectorPaginas()), configuracion() {
-    configuracion.setLimiteHistorial(100);
-    configuracion.setTiempoLimpiar(30);
-    agregarPestana(false);
+NavegadorWeb* NavegadorWeb::navegadorWeb = nullptr;
+
+NavegadorWeb::NavegadorWeb() {
+	this->csvpaginas = new VectorPaginas;
+	this->archivos = new GestorArchivos;
+	this->configuracion = new Configuracion;
+	this->pestanaLista = new ListaPestana;
 }
 
 NavegadorWeb::~NavegadorWeb()
 {
-    for (auto pestana : listaP) {
-        delete pestana;
-    }
-    listaP.clear();
-
-    delete paginas;
+	if (csvpaginas) delete csvpaginas;
+	if (archivos) delete archivos;
+	if (configuracion) delete configuracion;
+	if (pestanaLista) delete pestanaLista;
 }
 
-bool NavegadorWeb::agregarPestana(bool modoIn)
+NavegadorWeb& NavegadorWeb::getNavegadorWeb()
 {
-    listaP.push_back(new Pestana(modoIn));
-    PestanaActiva = --listaP.end();
-    return true;
+	if (navegadorWeb == nullptr) {
+		navegadorWeb = new NavegadorWeb();
+	}
+	return *navegadorWeb;
 }
-/*Para archivos*/
-void NavegadorWeb::agregarPestana(Pestana* p)
+
+/*=========================Historial de navegación=========================*/
+
+/*Metado para realizar la navegacion entre las paginas
+77= para adelente (Pagina)
+75= para atras (Pagina)
+72= para arriba (Pestana)
+80= para abajo  (Pestana)*/
+bool NavegadorWeb::navegar(int flecha)
 {
-    listaP.push_back(p);
-    PestanaActiva = --listaP.end();
+	if (flecha == 77) {
+		return pestanaLista->navegarAdelanteP();
+	}
+	else if (flecha == 75) {
+		return pestanaLista->navegarAtrasP();
+	}
+	else if (flecha == 72) {
+		return pestanaLista->navegarArriba();
+	}
+	else if (flecha == 80) {
+		return pestanaLista->navegarAbajo();
+	}
+	else
+		return false;
 }
+/*===========================================================================*/
 
-Pagina* NavegadorWeb::obtenerPaginaActiva()
+/*=========================Administrador de pestañas=========================*/
+
+/*1-Creacion de paginas y pestañas*/
+/*Primero busca la pagina en el csv si no esta  retorna  falso para que despues
+dar el error 404 – Not Found(MenuPrincal) */
+
+bool NavegadorWeb::visitarPagina(std::string url)
 {
-    if (!listaP.empty() && PestanaActiva != listaP.end()) {
-        return (*PestanaActiva)->getHistorial()->obtenerPaginaActiva();
-    }
-    return nullptr;
+	Pagina* aux = csvpaginas->buscarPagina(url);
+	if (aux) {
+		Pagina* copiaAux = new Pagina(*aux);
+		pestanaLista->visitarPagina(copiaAux);
+		//pestanaLista->aplicarPoliticasHistorial(configuracion->getLimiteHistorial() , configuracion->getTiempoLimpiar());
+		return true;
+	}
+	return false;
 }
 
-Pestana* NavegadorWeb::obtenerPestanaActiva()
+void NavegadorWeb::crearPestana(bool modo)
 {
-    if (!listaP.empty() && PestanaActiva != listaP.end()) {
-        return *PestanaActiva;
-    }
-    return nullptr;
+	pestanaLista->agregarPestana(modo);
 }
 
-void NavegadorWeb::mostrarPestanaActiva()
+/*2-Mostar la pagina activa o el historial de la pestana*/
+void NavegadorWeb::mostarPaginaActiva()
 {
-    if (!listaP.empty() && PestanaActiva != listaP.end()) {
-        std::cout << **PestanaActiva << std::endl;
-    }
-    else {
-        std::cout << "No hay pestaña activa." << std::endl;
-    }
+	pestanaLista->aplicarPoliticasHistorial(configuracion->getLimiteHistorial(), configuracion->getTiempoLimpiar());
+	pestanaLista->mostarPagina();
 }
 
-void NavegadorWeb::navegarArriba()
+void NavegadorWeb::mostarHistorial()
 {
-    if (PestanaActiva != listaP.begin()) {
-        --PestanaActiva;
-    }
-    else {
-        std::cout << "No se puede navegar más arriba." << std::endl;
-    }
+	pestanaLista->aplicarPoliticasHistorial(configuracion->getLimiteHistorial(), configuracion->getTiempoLimpiar());
+	pestanaLista->mostrarPestanaActiva();
 }
 
-void NavegadorWeb::navegarAbajo()
+
+/*++++++++++++++++++3++++++++++++++++++++++*/
+void NavegadorWeb::actualizarConfiguracion(Configuracion* confi)
 {
-    if (PestanaActiva != listaP.end() && std::next(PestanaActiva) != listaP.end()) {
-        ++PestanaActiva;
-    }
-    else {
-        std::cout << "No se puede navegar más abajo." << std::endl;
-    }
+	if (configuracion) delete configuracion;
+	configuracion = confi;
 }
+/*===========================================================================*/
 
-const std::list<Pestana*>& NavegadorWeb::obtenerListaPestanas() const
+/*=========================Sistema de marcadores=========================*/
+
+/* Cada pagina solo puede tener un marcador si la persona 
+crea un nueva marcadeor para a la misca pagian se elimina el viejo 
+para poner el nuevo*/
+bool NavegadorWeb::agregarMarcador(Marcador* marcador)
 {
-    return listaP;
+	return pestanaLista->agregarMarcador(marcador);
 }
 
-void NavegadorWeb::agregarMarcador(Marcador* marcador)
+/*Si es false es por que la pagian no tiene un marcador*/
+bool NavegadorWeb::agracarEtiqueta(const std::string etiqueta)
 {
-    (*PestanaActiva)->PagregarMarcador(marcador);
+	return pestanaLista->agregarEtiqueta(etiqueta);
 }
 
-void NavegadorWeb::agregarEtiqueta(std::string etiqueta)
+/*Mostrar las paginas de la pestana activa que poseen el marcador con el 
+nombre solicitado */
+std::string NavegadorWeb::busquedaMarcador(const std::string& marcador) const
 {
-    (*PestanaActiva)->PagregarEtiqueta(etiqueta);
+	return pestanaLista->buscarPaginas(marcador);
 }
 
-void NavegadorWeb::PnavegarAdelante()
+
+
+/*===========================================================================*/
+
+
+/*=========================Búsqueda y filtrado de historial=========================*/
+
+/*Guarda el naveador que estanso usando*/
+void NavegadorWeb::guardarSeccion(const std::string nombreArchivo)
 {
-    (*PestanaActiva)->PnavegarAdelante();
+	archivos->Guardar(nombreArchivo, pestanaLista);
 }
-
-void NavegadorWeb::PnavegarAtras()
+/*Carga el navegadro anteriormente guardado*/
+void NavegadorWeb::cargarSeccion(const std::string nombreArchivo)
 {
-    (*PestanaActiva)->PnavegarAtras();
-}
-//Primero busca la pagina en el csv si no esta  retorna  falso para que
-// despues dar el error 404 – Not Found ( todavia no realizado) 
-bool NavegadorWeb::visitarPagina(std::string p)
-{
-    Pagina* aux = paginas->buscarPagina(p);
-    if (aux) {
-        Pagina* copiaAux = new Pagina(*aux);
-        bool r = (*PestanaActiva)->visitarPagina(copiaAux);
-        aplicarPoliticasHistorial();
-        return r;
-    }
-    return false;
-}
-
-bool NavegadorWeb::eliminarPagina(const std::string& criterio)
-{
-    if (PestanaActiva != listaP.end()) {
-        return (*PestanaActiva)->getHistorial()->eliminarPáginas(criterio);
-    }
-    return false;
-}
-
-Pagina* NavegadorWeb::buscarPagina(const std::string& criterio)
-{
-    if (PestanaActiva != listaP.end()) {
-        return (*PestanaActiva)->getHistorial()->buscarPáginas(criterio);
-    }
-    return nullptr;
-}
-
-void NavegadorWeb::configurarHistorial(int limite, int tiempoLimpiar)
-{
-    configuracion.setLimiteHistorial(limite);
-    configuracion.setTiempoLimpiar(tiempoLimpiar);
-}
-
-void NavegadorWeb::aplicarPoliticasHistorial() {
-
-    while (listaP.size() > configuracion.getLimiteHistorial()) {
-        listaP.pop_front(); // Elimina el primer elemento de la lista (más antiguo)
-    }
-    auto ahora = std::chrono::system_clock::now();
-    auto tiempoLimpiar = std::chrono::hours(configuracion.getTiempoLimpiar() * 24);
-
-    for (auto it = listaP.begin(); it != listaP.end();) {
-        // Obtener la fecha de visita de la página activa
-        if (std::chrono::duration_cast<std::chrono::hours>(ahora - (*it)->getFechaVisita()) > tiempoLimpiar) {
-            it = listaP.erase(it);
-        }
-        else {
-            ++it;
-        }
-    }
-}
-
-
-std::ostream& operator<<(std::ostream& outp, const NavegadorWeb& n)
-{
-    for (const auto& pestana : n.listaP) {
-        if (pestana->getModoIncognito() == false) {
-            outp << *pestana << std::endl;
-        }
-    }
-    return outp;
+	archivos->Leer(nombreArchivo , pestanaLista);
 }
 
 
 
-//void NavegadorWeb::guardarNavegadorWeb(std::string& nombreArchivo) {
-//    // Abrir el archivo en modo binario y agregar datos al final
-//    std::ofstream handle(nombreArchivo, std::ios::binary | std::ios::trunc);
-//
-//    if (!handle.is_open()) {
-//        std::cerr << "Error al abrir el archivo '" << nombreArchivo << "'\n";
-//        return;
-//    }
-//
-//    size_t numPestanas = 0;
-//    for (const auto& pestana : listaP) {
-//        if (!pestana->getModoIncognito()) {
-//            ++numPestanas;
-//        }
-//    }
-//    // Guardar el número de pestañas que no están en modo incógnito
-//    handle.write(reinterpret_cast<char*>(&numPestanas), sizeof(numPestanas));
-//
-//    for (const auto& pestana : listaP) {
-//        if (!pestana->getModoIncognito()) {
-//            pestana->guardarPestana(handle);
-//        }
-//    }
-//
-//    handle.close();
-//}
-//
-//// Implementación de leerNavegadorWeb
-//void NavegadorWeb::leerNavegadorWeb(std::string& nombreArchivo) {
-//    std::ifstream handle(nombreArchivo, std::ios::binary);
-//
-//    if (!handle.is_open()) {
-//        std::cout << "Error al abrir el archivo '" << nombreArchivo << "'";
-//        exit(EXIT_FAILURE);
-//    }
-//    //leer numero pestañas
-//    size_t numPestanas;
-//    handle.read(reinterpret_cast<char*>(&numPestanas), sizeof(numPestanas));
-//    //leer cada pestaña
-//    for (size_t i = 0; i < numPestanas; ++i) {
-//        Pestana* pestana = new Pestana(false); // Inicializa con un valor por defecto
-//        pestana->leerPestana(handle);
-//        listaP.push_back(pestana);
-//    }
-//
-//    handle.close();
-//}
+/*===========================================================================*/
+
+

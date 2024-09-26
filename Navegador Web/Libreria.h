@@ -9,3 +9,5 @@
 #include <fstream>
 #include <chrono>
 #include <ctime>
+#include <limits>
+#include <iomanip> // Para std::setw

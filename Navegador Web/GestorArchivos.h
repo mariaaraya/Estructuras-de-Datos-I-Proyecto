@@ -1,15 +1,13 @@
 #pragma once
-#include "Clases.h"
-
-class NavegadorWeb;
+#include "ListaPestana.h"
 
 class GestorArchivos
 {
 public:
 	GestorArchivos() = default;
 	~GestorArchivos() = default;
-	void Guardar(const std::string, NavegadorWeb*);
-	void Leer(const std::string, NavegadorWeb*);
+	void Guardar(const std::string, ListaPestana*);
+	void Leer(const std::string, ListaPestana*);
 private:
 
 };

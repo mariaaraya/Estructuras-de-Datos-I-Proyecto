@@ -44,7 +44,7 @@ void VectorPaginas::agregarPagina(Pagina* nuevaPagina)
 Pagina* VectorPaginas::buscarPagina(std::string titulo)
 {
 	for (const auto& pagina : paginas) {
-		if (pagina->getTitulo() == titulo) {
+		if (pagina->getURL() == titulo) {
 			return pagina;
 		}
 	}

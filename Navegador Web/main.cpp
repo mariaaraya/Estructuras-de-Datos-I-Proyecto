@@ -1,74 +1,22 @@
+#define _CRTDBG_MAP_ALLOC
+#include <stdlib.h>
+#include <crtdbg.h>
 #include "Clases.h"
 #include "Libreria.h"
+#include "MenuPrincipal.h"
+#include "Controler.h"
+using namespace std;
 
 int main() {
-
-    GestorArchivos arc;
-    NavegadorWeb* navegador = new NavegadorWeb();
+    _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 
 
-    // Configurar el historial del navegador
-    int limiteHistorial = 3;  // Límite de 3 entradas en el historial
-    int tiempoLimpiar = 1;    // Tiempo para limpiar entradas viejas en días (1 día de antigüedad)
-    navegador->configurarHistorial(limiteHistorial, tiempoLimpiar);
 
-    //  Agregar algunas pestañas con páginas
-    Historial* historial1 = new Historial();
-    navegador->agregarPestana(false);
-    navegador->visitarPagina("Twitter");
-    navegador->visitarPagina("Yahoo");
-    navegador->agregarMarcador(new Marcador("Hola"));
-    navegador->agregarEtiqueta("sopa");
-    navegador->agregarPestana(false);
-    navegador->visitarPagina("Baidu");
-    navegador->visitarPagina("Tumblr");
-    navegador->agregarPestana(true);
-    navegador->visitarPagina("Yahoo");
-    navegador->visitarPagina("Tumblr");
-    std::cout << "Navegador 1 ----------\n" << *navegador << std::endl;
+    Controler* c = new Controler();
+    c->controlPrincipal();
+    delete c;
 
-    navegador->mostrarPestanaActiva();
-    navegador->navegarArriba();
-    navegador->mostrarPestanaActiva();
-    std::cout << "Pagina Activa: \n" << *navegador->obtenerPaginaActiva() << std::endl;
-
-    std::string paginaBuscar = "Yahoo";
-    Pagina* paginaEncontrada = navegador->buscarPagina(paginaBuscar);
-    if (paginaEncontrada) {
-        std::cout << "Pagina encontrada: " << *paginaEncontrada << std::endl;
-    }
-    else {
-        std::cout << "Pagina no encontrada" << std::endl;
-    }
-
-    std::string paginaEliminar = "Tumblr";
-    bool eliminada = navegador->eliminarPagina(paginaEliminar);
-    if (eliminada) {
-        std::cout << "Pagina " << paginaEliminar << " eliminada con exito" << std::endl;
-    }
-    else {
-        std::cout << "Pagina " << paginaEliminar << " no eliminada" << std::endl;
-    }
-
-
-    std::cout << "\n Historial antes de aplicar politicas: \n"
-        << *navegador->obtenerPestanaActiva()->getHistorial();
-
-    // Aplicar políticas
-    navegador->aplicarPoliticasHistorial();
-
-    std::cout << "\n Historial después de aplicar politicas: \n"
-        << *navegador->obtenerPestanaActiva()->getHistorial();
-
-    // Guardar el estado del navegador en un archivo
-    std::string nombreArchivo = "navegador.bin";
-    arc.Guardar(nombreArchivo, navegador);
-
-
-    // Crear una nueva instancia de NavegadorWeb para leer los datos
-    NavegadorWeb* navegadorLeido = new NavegadorWeb();
-    arc.Leer(nombreArchivo, navegadorLeido);
-    std::cout << "Navegador 2 ----------\n" << *navegadorLeido << std::endl;
+    _CrtDumpMemoryLeaks(); // cuando se depura nos dice si hay memory leaks
 
     system("pause");
     return 0;
