@@ -105,6 +105,7 @@ bool GestorArchivos::verificarArchivo(const std::string nombreArchivo)
     if (!handle.is_open()) {
         return false;
     }
+    handle.close();
     return true;
 }
 

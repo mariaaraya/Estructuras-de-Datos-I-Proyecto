@@ -20,7 +20,7 @@ Controler::~Controler()
 void Controler::controlPrincipal()
 {
 	MenuPrincipal::bienvenida();
-	NuevaPestana(); // Se crea una pestaña apenas se ingrea el sistema
+	NuevaPestana(); // Se crea una pestaña apenas se ingresa el sistema
 	system("pause");
 	system("cls");
 	do {

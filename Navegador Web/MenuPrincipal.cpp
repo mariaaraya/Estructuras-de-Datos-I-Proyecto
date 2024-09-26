@@ -211,7 +211,7 @@ void MenuPrincipal::salir()
 	std::cout << "---------------------> C R E A D O R E S <---------------------\n\n";
 	std::cout << " Kendra Artavia Caballero.\n";
     std::cout << " Alexia Alvarado Alfaro.\n";
-    std::cout << " Maria Aroyo Campos.\n";
+    std::cout << " Maria Araya Campos.\n";
 	std::cout << "\n----------> G R A C I A S   P O R   U T I L I Z A R <----------\n";
 
 }
