@@ -15,16 +15,13 @@ public:
 	bool visitarPagina(std::string);
 	void crearPestana(bool); // Metodo tambien usado para creacion de pestaña incognita
 	// 2- Mostare la pagina activa o el historial de la pestana
-	void mostarPaginaActiva();
-	void mostarHistorial();
+	void Mostrar();
 	// 3- Configuracion
 	void actualizarConfiguracion(Configuracion*);
 	/*----Sistema de marcadores----*/
 	// 1- Agregar marcador
 	bool agregarMarcador(Marcador*);
-	// 2- Agregar etiquetas
-    bool agracarEtiqueta(const  std::string);
-	// 3- Busqueda de marcador
+	// 2- Busqueda de marcador
 	std::string busquedaMarcador(const std::string&)const;
 	/*----Búsqueda y filtrado de historial----*/
 	// 1- Guardar

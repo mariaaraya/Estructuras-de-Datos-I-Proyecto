@@ -74,17 +74,10 @@ void NavegadorWeb::crearPestana(bool modo)
 	pestanaLista->agregarPestana(modo);
 }
 
-/*2-Mostar la pagina activa o el historial de la pestana*/
-void NavegadorWeb::mostarPaginaActiva()
+void NavegadorWeb::Mostrar()
 {
 	pestanaLista->aplicarPoliticasHistorial(configuracion->getLimiteHistorial(), configuracion->getTiempoLimpiar());
-	pestanaLista->mostarPagina();
-}
-
-void NavegadorWeb::mostarHistorial()
-{
-	pestanaLista->aplicarPoliticasHistorial(configuracion->getLimiteHistorial(), configuracion->getTiempoLimpiar());
-	pestanaLista->mostrarPestanaActiva();
+	pestanaLista->PMostrar();
 }
 
 
@@ -106,19 +99,12 @@ bool NavegadorWeb::agregarMarcador(Marcador* marcador)
 	return pestanaLista->agregarMarcador(marcador);
 }
 
-/*Si es false es por que la pagian no tiene un marcador*/
-bool NavegadorWeb::agracarEtiqueta(const std::string etiqueta)
-{
-	return pestanaLista->agregarEtiqueta(etiqueta);
-}
-
 /*Mostrar las paginas de la pestana activa que poseen el marcador con el 
 nombre solicitado */
 std::string NavegadorWeb::busquedaMarcador(const std::string& marcador) const
 {
 	return pestanaLista->buscarPaginas(marcador);
 }
-
 
 
 /*===========================================================================*/
@@ -134,7 +120,13 @@ void NavegadorWeb::guardarSeccion(const std::string nombreArchivo)
 /*Carga el navegadro anteriormente guardado*/
 void NavegadorWeb::cargarSeccion(const std::string nombreArchivo)
 {
-	archivos->Leer(nombreArchivo , pestanaLista);
+	if (archivos->verificarArchivo(nombreArchivo) == true) {
+		delete pestanaLista;
+		pestanaLista = archivos->Leer(nombreArchivo);
+	}
+	else {
+		std::cout << "Error en cargar el archivo" << std::endl;
+	}
 }
 
 

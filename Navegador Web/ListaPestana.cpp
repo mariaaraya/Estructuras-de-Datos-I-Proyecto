@@ -41,12 +41,32 @@ Pestana* ListaPestana::obtenerPestanaActiva()
 
 void ListaPestana::mostrarPestanaActiva()
 {
-    if (!listaP.empty() && PestanaActiva != listaP.end()) {
-        std::cout << **PestanaActiva << std::endl;
+    // Secuencia ANSI para color azul (para sistemas compatibles).
+    const std::string azul = "\033[34m";
+    const std::string reset = "\033[0m";
+
+    int indice = 1;  // Contador para indicar el número de la pestaña.
+
+    // Iterar por todas las pestañas.
+    for (auto it = listaP.begin(); it != listaP.end(); ++it, ++indice) {
+        std::string formatoInicio = "<", formatoFin = ">";
+        std::string color = ""; // Por defecto, sin color.
+
+        // Si la pestaña está en modo incógnito, agregar el color azul.
+        if ((*it)->getModoIncognito()) {
+            color = azul;
+        }
+
+        // Si esta es la pestaña activa, cambiamos el formato a `<< >>`.
+        if (it == PestanaActiva) {
+            formatoInicio = "<<";
+            formatoFin = ">>";
+        }
+
+        // Mostrar el índice de la pestaña con el formato y color adecuado.
+        std::cout << color << formatoInicio << "Pestana " << indice << formatoFin << reset << " ";
     }
-    else {
-        std::cout << "No hay pestaña activa." << std::endl;
-    }
+    std::cout << std::endl;  // Para asegurar que las pestañas se imprimen en la misma línea.
 }
 
 bool ListaPestana::navegarArriba()
@@ -62,7 +82,7 @@ bool ListaPestana::navegarArriba()
 
 bool ListaPestana::navegarAbajo()
 {
-    if (PestanaActiva != listaP.end() && std::next(PestanaActiva) != listaP.end()) {
+    if (PestanaActiva != std::prev(listaP.end())) {
         ++PestanaActiva;
         return true;
     }
@@ -106,6 +126,17 @@ bool ListaPestana::navegarAdelanteP()
 void ListaPestana::mostarPagina()
 {
     (*PestanaActiva)->mostarPagina();
+}
+
+void ListaPestana::PMostrar()
+{
+    std::cout << "==========================================================================================\n";
+    std::cout << "                                      Navegador Web         \n";
+    std::cout << "==========================================================================================\n";
+    mostrarPestanaActiva();
+    std::cout << "------------------------------------------------------------------------------------------\n";
+    mostarPagina(); 
+    std::cout << "==========================================================================================\n\n";
 }
 
 

@@ -24,6 +24,7 @@ void Controler::controlPrincipal()
 	system("pause");
 	system("cls");
 	do {
+		navegador->Mostrar();
 		opcion = MenuPrincipal::menuPrincipal();
 		system("pause");
 		system("cls");
@@ -75,6 +76,7 @@ void Controler::controlPrincipal()
 			MenuPrincipal::excepcion(e);
 			system("pause");
 			system("cls");
+			delete e;
 		}
 		catch (...) {
 			MenuPrincipal::error();
@@ -99,7 +101,7 @@ void Controler::Vistar()
 /* Case 2*/
 void Controler::NuevaPestana()
 {
-	navegador->crearPestana(true);
+	navegador->crearPestana(false);
 }
 
 
@@ -165,6 +167,7 @@ void Controler::Archivos()
 			MenuPrincipal::excepcion(e);
 			system("pause");
 			system("cls");
+			delete e;
 		}
 		catch (...) {
 			MenuPrincipal::error();
@@ -176,10 +179,8 @@ void Controler::Archivos()
 
 void Controler::Archivos1()
 {
-	std::string archivo = MenuPrincipal::nombreArchivo();
-	navegador->guardarSeccion(archivo);
-	system("pause");
-	system("cls");
+		std::string archivo = MenuPrincipal::nombreArchivo();
+		navegador->guardarSeccion(archivo); // Captura posibles excepciones aquí
 }
 
 void Controler::Archivos2()

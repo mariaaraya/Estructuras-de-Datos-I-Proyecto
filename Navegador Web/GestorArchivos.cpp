@@ -99,7 +99,17 @@ void GestorArchivos::Guardar(const std::string nombreArchivo, ListaPestana* n) {
     handle.close();
 }
 
-void GestorArchivos::Leer(const std::string nombreArchivo, ListaPestana* n)
+bool GestorArchivos::verificarArchivo(const std::string nombreArchivo)
+{
+    std::ifstream handle(nombreArchivo, std::ios::binary);
+    if (!handle.is_open()) {
+        return false;
+    }
+    return true;
+}
+
+
+ListaPestana* GestorArchivos::Leer(const std::string nombreArchivo)
 {
     std::ifstream handle(nombreArchivo, std::ios::binary);
 
@@ -107,12 +117,15 @@ void GestorArchivos::Leer(const std::string nombreArchivo, ListaPestana* n)
         throw std::runtime_error("Error al abrir el archivo '" + nombreArchivo + "'");
     }
 
-    // Leer de pestañas
+    // Crear una nueva lista de pestañas
+    ListaPestana* listaPestanas = new ListaPestana();
+
+    // Leer número de pestañas
     size_t numPestanas;
     handle.read(reinterpret_cast<char*>(&numPestanas), sizeof(numPestanas));
 
     if (!handle) {
-        throw std::runtime_error("Error al leer el numero de pestañas.");
+        throw std::runtime_error("Error al leer el número de pestañas.");
     }
 
     // Leer cada pestaña
@@ -121,10 +134,12 @@ void GestorArchivos::Leer(const std::string nombreArchivo, ListaPestana* n)
         handle.read(reinterpret_cast<char*>(&modoIncognito), sizeof(modoIncognito));
 
         if (!handle) {
-            throw std::runtime_error("Error al leer el modo incognito de la pestaña.");
+            throw std::runtime_error("Error al leer el modo incógnito de la pestaña.");
         }
 
-        Pestana* pestana = new Pestana(modoIncognito); // Crear la nueva pestaña
+        // Crear una nueva pestaña
+        Pestana* pestana = new Pestana(modoIncognito);
+
         bool hasHistorial;
         handle.read(reinterpret_cast<char*>(&hasHistorial), sizeof(hasHistorial));
 
@@ -137,7 +152,7 @@ void GestorArchivos::Leer(const std::string nombreArchivo, ListaPestana* n)
             handle.read(reinterpret_cast<char*>(&numPaginas), sizeof(numPaginas));
 
             if (!handle) {
-                throw std::runtime_error("Error al leer el numero de paginas en el historial.");
+                throw std::runtime_error("Error al leer el número de páginas en el historial.");
             }
 
             for (size_t j = 0; j < numPaginas; ++j) {
@@ -147,7 +162,7 @@ void GestorArchivos::Leer(const std::string nombreArchivo, ListaPestana* n)
                 size_t tituloSize;
                 handle.read(reinterpret_cast<char*>(&tituloSize), sizeof(tituloSize));
                 if (!handle) {
-                    throw std::runtime_error("Error al leer el tamano del titulo de la pagina.");
+                    throw std::runtime_error("Error al leer el tamaño del título de la página.");
                 }
 
                 std::string titulo(tituloSize, '\0');
@@ -158,7 +173,7 @@ void GestorArchivos::Leer(const std::string nombreArchivo, ListaPestana* n)
                 size_t URLSize;
                 handle.read(reinterpret_cast<char*>(&URLSize), sizeof(URLSize));
                 if (!handle) {
-                    throw std::runtime_error("Error al leer el tamano del URL de la pagina.");
+                    throw std::runtime_error("Error al leer el tamaño de la URL de la página.");
                 }
 
                 std::string URL(URLSize, '\0');
@@ -180,7 +195,7 @@ void GestorArchivos::Leer(const std::string nombreArchivo, ListaPestana* n)
                     size_t nombreSize;
                     handle.read(reinterpret_cast<char*>(&nombreSize), sizeof(nombreSize));
                     if (!handle) {
-                        throw std::runtime_error("Error al leer el tamano del nombre del marcador.");
+                        throw std::runtime_error("Error al leer el tamaño del nombre del marcador.");
                     }
 
                     std::string nombre(nombreSize, '\0');
@@ -191,14 +206,14 @@ void GestorArchivos::Leer(const std::string nombreArchivo, ListaPestana* n)
                     size_t etiquetasSize;
                     handle.read(reinterpret_cast<char*>(&etiquetasSize), sizeof(etiquetasSize));
                     if (!handle) {
-                        throw std::runtime_error("Error al leer el tamano de las etiquetas.");
+                        throw std::runtime_error("Error al leer el tamaño de las etiquetas.");
                     }
 
                     for (size_t k = 0; k < etiquetasSize; ++k) {
                         size_t etiquetaSize;
                         handle.read(reinterpret_cast<char*>(&etiquetaSize), sizeof(etiquetaSize));
                         if (!handle) {
-                            throw std::runtime_error("Error al leer el tamano de la etiqueta.");
+                            throw std::runtime_error("Error al leer el tamaño de la etiqueta.");
                         }
 
                         std::string etiqueta(etiquetaSize, '\0');
@@ -208,11 +223,13 @@ void GestorArchivos::Leer(const std::string nombreArchivo, ListaPestana* n)
                 }
 
                 historial->agregarPagina(pagina); // Agregar página al historial
-                std::cout << *pestana << std::endl;
             }
         }
 
-        n->agregarPestana(pestana);
+        listaPestanas->agregarPestana(pestana); // Agregar la pestaña a la lista
     }
+
     handle.close();
+
+    return listaPestanas; // Retornar la lista de pestañas
 }

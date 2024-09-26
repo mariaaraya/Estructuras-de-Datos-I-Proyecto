@@ -37,7 +37,11 @@ Pagina* Historial::obtenerPaginaActiva()
 
 void Historial::mostrarPaginaActiva()
 {
-	std::cout << **PaginaActiva << std::endl;
+    if (PaginaActiva != listaP.end()) {
+        std::cout << **PaginaActiva << std::endl;
+    }
+    else
+        std::cout << "" << std::endl;
 }
 
 bool Historial::navegarAtras()
@@ -49,11 +53,10 @@ bool Historial::navegarAtras()
     return false;
 }
 
-
-
 bool Historial::navegarAdelante()
 {
-    if (PaginaActiva != listaP.begin() && std::next(PaginaActiva) != listaP.end()) {
+
+    if (PaginaActiva != listaP.end() && PaginaActiva != std::prev(listaP.end())) {
         ++PaginaActiva;
         return true;
     }
@@ -135,7 +138,7 @@ void Historial::aplicarPoliticasHistorial(int limiteHistorial, int TiempoLimpiar
 {
     while (listaP.size() > limiteHistorial) {
         eliminarPaginaFrente();
-        std::cout << "lo elimmo";
+      
     }
     auto ahora = std::chrono::system_clock::now();
     auto tiempoLimpiar = std::chrono::hours(TiempoLimpiar * 24);
@@ -146,16 +149,14 @@ void Historial::aplicarPoliticasHistorial(int limiteHistorial, int TiempoLimpiar
 
         std::time_t fechaVisitaTimeT = std::chrono::system_clock::to_time_t(fechaVisita);
         std::tm* tm = std::localtime(&fechaVisitaTimeT);
-        std::cout << "Fecha de visita: " << std::put_time(tm, "%Y-%m-%d %H:%M:%S") << '\n';
-        std::cout << "Tiempo desde la visita: " << tiempoVisita.count() << " horas\n";
 
         if (tiempoVisita > tiempoLimpiar) {
             if (PaginaActiva == it) {
                 PaginaActiva = std::next(it);
-                std::cout << "lo elimmo";
+            
             }
             it = listaP.erase(it);
-            std::cout << "lo elimmo";
+          
         }
         else {
             ++it;

@@ -20,6 +20,7 @@ public:
 	bool navegarAtrasP();
 	bool navegarAdelanteP();
 	void mostarPagina();
+	void PMostrar();
 	//Metodo del marcadores
 	bool agregarMarcador(Marcador*);
 	bool agregarEtiqueta(std::string);

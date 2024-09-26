@@ -126,10 +126,12 @@ int MenuPrincipal::menuArchivo()
     return opcion;
 }
 
+
 std::string MenuPrincipal::nombreArchivo()
 {
     std::string archivo = "";
     std::cout << "Ingrese un nombre para guardar la seccion:\n";
+    std::cin >> archivo;
     return archivo;
 }
 
@@ -137,9 +139,9 @@ std::string MenuPrincipal::nombreArchivoLeer()
 {
     std::string archivo = "";
     std::cout << "Ingrese un nombre para continuar con la seccion:\n";
+    std::cin >> archivo;
     return archivo;
 }
-
 
 
 
@@ -191,7 +193,7 @@ void MenuPrincipal::salir()
 	std::cout << "---------------------> C R E A D O R E S <---------------------\n\n";
 	std::cout << " Kendra Artavia Caballero.\n";
     std::cout << " Alexia Alvarado Alfaro.\n";
-    std::cout << " Maria Aroyo .\n";
+    std::cout << " Maria Aroyo Campos.\n";
 	std::cout << "\n----------> G R A C I A S   P O R   U T I L I Z A R <----------\n";
 
 }
