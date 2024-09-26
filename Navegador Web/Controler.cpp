@@ -202,4 +202,5 @@ void Controler::Navegar()
 void Controler::Finalizar()
 {
 	MenuPrincipal::salir();
+	system("pause");
 }

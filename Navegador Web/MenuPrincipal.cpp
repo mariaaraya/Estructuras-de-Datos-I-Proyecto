@@ -118,6 +118,7 @@ int MenuPrincipal::menuArchivo()
     std::cout << "[1] Guardar Seccion\n";
     std::cout << "[2] Continuar Seccion\n";
     std::cout << "[3] Salir\n";
+    std::cin >> opcion;
     if (std::cin.fail() || opcion <= 0) {
         std::cin.clear();
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
@@ -189,8 +190,8 @@ void MenuPrincipal::salir()
 {
 	std::cout << "---------------------> C R E A D O R E S <---------------------\n\n";
 	std::cout << " Kendra Artavia Caballero.\n";
-    std::cout << " .\n";
-    std::cout << " .\n";
+    std::cout << " Alexia Alvarado Alfaro.\n";
+    std::cout << " Maria Aroyo .\n";
 	std::cout << "\n----------> G R A C I A S   P O R   U T I L I Z A R <----------\n";
 
 }
