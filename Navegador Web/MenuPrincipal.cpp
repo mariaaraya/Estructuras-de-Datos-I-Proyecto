@@ -7,6 +7,7 @@
 int MenuPrincipal::menuPrincipal()
 {
     int opcion = 0;
+    std::cout << "\n--------------- M E N U ------------------\n";
     std::cout << "[1] Ir al sitio web\n";
     std::cout << "[2] Nueva pestana\n";
     std::cout << "[3] Marcadores\n";
@@ -15,6 +16,7 @@ int MenuPrincipal::menuPrincipal()
     std::cout << "[6] Configuracion\n";
     std::cout << "[7] Importacion y exportacion\n";
     std::cout << "[8] Salir\n";
+    std::cout << "Ingrese la ocpion: ";
     while (true) {
         int tecla = _getch(); // Captura la tecla presionada
         if (tecla >= '1' && tecla <= '8') { // Verifica si la tecla es un número válido
@@ -39,14 +41,14 @@ int MenuPrincipal::menuPrincipal()
     }
     std::cout << opcion << std::endl;
     return opcion;
-
 }
 
 std::string MenuPrincipal::URl()
 {
     std::string url = "" ;
-    std::cout << "Ingrese el URL:\n";
+    std::cout << "Ingrese el URL:";
     std::cin >> url;
+    std::cout<<"\n";
     return url;
 }
 
@@ -66,8 +68,9 @@ void MenuPrincipal::pagina404()
 std::string MenuPrincipal::nombreMarcador()
 {
     std::string marcador = "";
-    std::cout << "Ingrese el nombre del marcador:\n";
+    std::cout << "Ingrese el nombre del marcador:";
     std::cin >> marcador;
+    std::cout << "\n";
     return marcador;
 
 }
@@ -77,15 +80,18 @@ Marcador* MenuPrincipal::marcador()
     std::string marcador = "";
     int etiqueta = 0;
     std::string etiqueta2 = "";
-    std::cout << "Ingrese el nombre del marcador:\n";
+    std::cout << "Ingrese el nombre del marcador:";
     std::cin >> marcador;
+    std::cout<<"\n";
     Marcador* aux = new Marcador(marcador);
-    std::cout << "Dijite la cantidad de etiquetas que quiere:\n";
+    std::cout << "Dijite la cantidad de etiquetas que quiere:";
     std::cin >> etiqueta;
+    std::cout<<"\n";
    // comprobarint(etiqueta);
     for (int i = 0; i < etiqueta; i++) {
-     std::cout << "Ingrese el nombre de la etiqueta:\n";
+     std::cout << "Ingrese el nombre de la etiqueta:";
      std::cin >> etiqueta2;
+     std::cout<<"\n";
      aux->agregarEtiqueta(etiqueta2);
      etiqueta2 = "";
     }
@@ -99,11 +105,13 @@ Configuracion* MenuPrincipal::crearConfiguracion()
     Configuracion* aux = new Configuracion();
     int limite;
     int tiempo;
-    std::cout << "Dijite el maximo de pagina que desea vistar:\n";
+    std::cout << "Dijite el maximo de pagina que desea vistar: ";
     std::cin >> limite;
+    std::cout << "\n";
     comprobarint(limite);
-    std::cout << "Dijite el maximo del tiempo que desea que una pagina este activa:\n";
+    std::cout << "Dijite el maximo del tiempo que desea que una pagina este activa: ";
     std::cin >> tiempo;
+    std::cout << "\n";
     comprobarint(tiempo);
     aux->setLimiteHistorial(limite);
     aux->setTiempoLimpiar(tiempo);
@@ -118,7 +126,9 @@ int MenuPrincipal::menuArchivo()
     std::cout << "[1] Guardar Seccion\n";
     std::cout << "[2] Continuar Seccion\n";
     std::cout << "[3] Salir\n";
+    std::cout << "Opcion: ";
     std::cin >> opcion;
+    std::cout << "\n";
     if (std::cin.fail() || opcion <= 0) {
         std::cin.clear();
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
@@ -130,16 +140,18 @@ int MenuPrincipal::menuArchivo()
 std::string MenuPrincipal::nombreArchivo()
 {
     std::string archivo = "";
-    std::cout << "Ingrese un nombre para guardar la seccion:\n";
+    std::cout << "Ingrese un nombre para guardar la seccion: ";
     std::cin >> archivo;
+    std::cout << "\n";
     return archivo;
 }
 
 std::string MenuPrincipal::nombreArchivoLeer()
 {
     std::string archivo = "";
-    std::cout << "Ingrese un nombre para continuar con la seccion:\n";
+    std::cout << "Ingrese un nombre para continuar con la seccion: ";
     std::cin >> archivo;
+    std::cout << "\n";
     return archivo;
 }
 
@@ -185,7 +197,13 @@ void MenuPrincipal::error()
 /*--------------Salida--------------*/
 void MenuPrincipal::bienvenida()
 {
-    std::cout << "----> Bienvenida <----\n";
+    std::cout << "\n----> Bienvenidos al Navegador Web de EDD <----\n";
+    std::cout<<std::endl<< "Para navegar entre pestannas use las flechas de Arriba y Abajo" << std::endl;
+    std::cout << "Por ejemplo: Primera pestanna almacena las primera paginas" << std::endl;
+    std::cout << "La segunda pestanna almacena las otra paginas, y para navegar a esta apreta la tecla de Abajo" << std::endl;
+    std::cout << "Asi continuamente puede navegar entre las pestannas del navegador web :)" << std::endl;
+    std::cout << std::endl << "Esperamos que su experiencia sea grata, que lo disfrute!" << std::endl<<std::endl;
+
 }
 
 void MenuPrincipal::salir()
