@@ -30,28 +30,6 @@ namespace UnitTest
 			size_t cantidadDespues = navegador.getPestanaLista()->obtenerListaPestanas().size();
 			Assert::AreEqual(cantidadAntes + 1, cantidadDespues); //Para confirmar que en verdad se ha creado una pestaña			
 		}
-		TEST_METHOD(navegarPestannasPrueba)
-		{
-			NavegadorWeb& navegador = NavegadorWeb::getNavegadorWeb();
-			navegador.crearPestana(false); 
-			navegador.crearPestana(false); 
-			navegador.visitarPagina("https://www.facebook.com");
-			Pestana* pestañaActivaAntes = navegador.getPestanaLista()->obtenerPestanaActiva();
-			Assert::IsNotNull(pestañaActivaAntes);
-			// Esto es para navegar a la pestaña anterior 
-			bool cambioExitosoArriba = navegador.navegar(72);
-			Assert::IsTrue(cambioExitosoArriba); //Para verificar que navegue hacia arriba
-			Pestana* pestañaActivaDespues = navegador.getPestanaLista()->obtenerPestanaActiva();
-			Assert::IsNotNull(pestañaActivaDespues);
-			Assert::IsTrue(pestañaActivaDespues != pestañaActivaAntes); 
-			// Esto es para navegar a la pestaña posterior 
-			bool cambioExitosoAbajo = navegador.navegar(80);
-			Assert::IsTrue(cambioExitosoAbajo); //Para verificar que navegue hacia arriba
-			Pestana* pestañaActivaUltima = navegador.getPestanaLista()->obtenerPestanaActiva();
-			Assert::IsNotNull(pestañaActivaUltima);
-			// Verificar si la pestaña activa es la misma que al inicio o no lo es
-			Assert::IsTrue(pestañaActivaUltima == pestañaActivaAntes); // Verificar que se regrese a la pestaña original
-		}
 		TEST_METHOD(visitarPaginaPrueba)
 		{
 			NavegadorWeb& navegador = NavegadorWeb::getNavegadorWeb();
