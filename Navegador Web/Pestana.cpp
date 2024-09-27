@@ -14,6 +14,11 @@ void Pestana::setHistorial(Historial* historial) { this->historial = historial; 
 bool Pestana::getModoIncognito() { return modoIncognito; }
 void Pestana::setModoIncognito(bool modo) { modoIncognito = modo; }
 
+Pagina* Pestana::getPaginaActiva()
+{
+	return historial->obtenerPaginaActiva();
+}
+
 bool Pestana::PnavegarAdelante()
 {
 	return historial->navegarAdelante();

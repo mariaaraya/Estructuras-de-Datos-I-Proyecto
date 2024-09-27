@@ -13,6 +13,7 @@ public:
 	void setHistorial(Historial*);
 	bool getModoIncognito();
 	void setModoIncognito(bool);
+	Pagina* getPaginaActiva();
 	friend std::ostream& operator<<(std::ostream& outp, const Pestana&);
 	//Metodo del historial
 	bool PnavegarAdelante();

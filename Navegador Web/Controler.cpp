@@ -63,6 +63,7 @@ void Controler::controlPrincipal()
 			case 75:
 			case 77:
 				Navegar();
+				break;
 			case 8:
 				Finalizar();
 				system("cls");

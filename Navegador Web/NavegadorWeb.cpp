@@ -25,6 +25,16 @@ NavegadorWeb& NavegadorWeb::getNavegadorWeb()
 	return *navegadorWeb;
 }
 
+ListaPestana* NavegadorWeb::getPestanaLista()
+{
+	return pestanaLista;
+}
+
+Configuracion* NavegadorWeb::getConfiguracion()
+{
+	return configuracion;
+}
+
 /*=========================Historial de navegación=========================*/
 
 /*Metado para realizar la navegacion entre las paginas

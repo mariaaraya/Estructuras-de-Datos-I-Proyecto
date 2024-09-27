@@ -8,6 +8,8 @@ public:
 	virtual~NavegadorWeb();
 	/*Get del NavegarWeb*/
 	static NavegadorWeb& getNavegadorWeb();
+	ListaPestana* getPestanaLista();
+	Configuracion* getConfiguracion();
 	/*----Historial de navegación----*/
 	bool navegar(int);
 	/*----Administrador de pestañas----*/
