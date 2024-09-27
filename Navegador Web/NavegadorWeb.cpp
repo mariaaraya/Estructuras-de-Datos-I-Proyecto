@@ -91,7 +91,8 @@ void NavegadorWeb::Mostrar()
 }
 
 
-/*++++++++++++++++++3++++++++++++++++++++++*/
+/*===================== Configuracion ================================*/
+//actualiza las configuraciones	del usuario, el maximo de paginas y tiempo establecido
 void NavegadorWeb::actualizarConfiguracion(Configuracion* confi)
 {
 	if (configuracion) delete configuracion;

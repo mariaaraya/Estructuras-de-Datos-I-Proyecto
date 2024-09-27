@@ -33,7 +33,3 @@ private:
 	Historial* historial;
 	std::chrono::system_clock::time_point fechaVisita;
 };
-
-// Archivos binarios 
-//void guardarPestana(std::ofstream&);
-//void leerPestana(std::ifstream&);

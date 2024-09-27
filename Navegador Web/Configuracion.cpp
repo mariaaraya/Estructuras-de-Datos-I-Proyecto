@@ -25,5 +25,5 @@ int Configuracion::getTiempoLimpiar()
 
 void Configuracion::setTiempoLimpiar(int tiempo)
 {
-    tiempoLimpiar = tiempo;
+    tiempoLimpiar = tiempo * 60;  // Esto convertiría minutos a segundos
 }
