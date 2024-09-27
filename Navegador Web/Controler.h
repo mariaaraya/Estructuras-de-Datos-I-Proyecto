@@ -35,9 +35,3 @@ private:
 	NavegadorWeb* navegador;
 	int opcion;
 };
-
-/*
-	std::cout << "6. Configuración\n";
-	std::cout << "7. Importación y exportación\n";
-	std::cout << "8. Salir\n";  class Controler
-	*/

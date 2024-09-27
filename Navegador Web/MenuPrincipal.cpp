@@ -109,7 +109,7 @@ Configuracion* MenuPrincipal::crearConfiguracion()
     std::cin >> limite;
     std::cout << "\n";
     comprobarint(limite);
-    std::cout << "Dijite el maximo del tiempo que desea que una pagina este activa: ";
+    std::cout << "Dijite el maximo del tiempo (minutos) que desea que una pagina este activa: ";
     std::cin >> tiempo;
     std::cout << "\n";
     comprobarint(tiempo);

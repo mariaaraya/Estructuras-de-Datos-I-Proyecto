@@ -9,11 +9,11 @@ public:
 
 	// Getters
 	std::string getNombre() const;
-    std::vector<std::string> getEtiquetas() const; //nuevo
+    std::vector<std::string> getEtiquetas() const; 
 
 	// Setters
 	void setNombre(std::string);
-	void agregarEtiqueta(const std::string&); //nuevos
+	void agregarEtiqueta(const std::string&); 
 	void eliminarEtiqueta(const std::string&);
 
 	bool tieneEtiqueta(const std::string&) const;
@@ -24,8 +24,5 @@ public:
 	friend std::ostream& operator<<(std::ostream& outp, const Marcador&);
 private:
 	std::string nombre;
-	std::vector<std::string> etiquetas; //nuevo
+	std::vector<std::string> etiquetas; 
 };
-// archivos binarios
-//void guardarMarcador(std::ofstream&);
-//void leerMarcador(std::ifstream&);

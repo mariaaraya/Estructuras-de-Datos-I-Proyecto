@@ -32,7 +32,6 @@ public:
 	 //1- Crear Pestaña incognito
 	// meto en  Administrador de pestañas
 	/*----Políticas de administración del historial----*/
-	 //Configurar Configuracion ??
 	 //-Limitacion de entras
 	 //-Limpiar por tiempo 
 	 //Realiza en aregar y mostrar 

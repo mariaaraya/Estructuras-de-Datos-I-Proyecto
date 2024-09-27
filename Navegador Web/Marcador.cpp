@@ -53,39 +53,3 @@ std::ostream& operator<<(std::ostream& outp, const Marcador& m)
     return outp;
 
 }
-
-//void Marcador::guardarMarcador(std::ofstream& handle)
-//{
-//    size_t nombreSize = nombre.size();
-//    handle.write(reinterpret_cast<char*>(&nombreSize), sizeof(nombreSize));
-//    handle.write(nombre.c_str(), nombreSize);
-//
-//    // Guardar las etiquetas
-//    size_t etiquetasSize = etiquetas.size();
-//    handle.write(reinterpret_cast<char*>(&etiquetasSize), sizeof(etiquetasSize));
-//    for (const auto& etiqueta : etiquetas) {
-//        size_t etiquetaSize = etiqueta.size();
-//        handle.write(reinterpret_cast<char*>(&etiquetaSize), sizeof(etiquetaSize));
-//        handle.write(etiqueta.c_str(), etiquetaSize);
-//    }
-//}
-//
-//
-//void Marcador::leerMarcador(std::ifstream& handle) {
-//
-//    size_t nombreSize;
-//    handle.read(reinterpret_cast<char*>(&nombreSize), sizeof(nombreSize));
-//    nombre.resize(nombreSize);
-//    handle.read(&nombre[0], nombreSize);
-//    // Leer las etiquetas
-//    size_t etiquetasSize;
-//    handle.read(reinterpret_cast<char*>(&etiquetasSize), sizeof(etiquetasSize));
-//    etiquetas.resize(etiquetasSize);
-//    for (auto& etiqueta : etiquetas) {
-//        size_t etiquetaSize;
-//        handle.read(reinterpret_cast<char*>(&etiquetaSize), sizeof(etiquetaSize));
-//        etiqueta.resize(etiquetaSize);
-//        handle.read(&etiqueta[0], etiquetaSize);
-//    }
-//    //handle.close();
-//}

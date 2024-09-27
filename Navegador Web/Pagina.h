@@ -31,7 +31,3 @@ private:
 	Marcador* marcador;
 	std::chrono::system_clock::time_point fechaVisita;
 };
-
-// archivos binarios 
-	//void guardarPagina(std::ofstream&);
-	//void leerPagina(std::ifstream&);
