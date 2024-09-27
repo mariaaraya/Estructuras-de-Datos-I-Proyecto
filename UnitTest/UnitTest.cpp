@@ -128,15 +128,35 @@ namespace UnitTest
 			Assert::AreEqual(configActual->getLimiteHistorial(), 10); 
 			Assert::AreEqual(configActual->getTiempoLimpiar(), 30); 
 		}
-		TEST_METHOD(guardarYCargarPrueba)
+		TEST_METHOD(guardarPrueba)
 		{
 			NavegadorWeb& navegador = NavegadorWeb::getNavegadorWeb();
 			navegador.crearPestana(false);
-			navegador.visitarPagina("https://facebook.com");
+			navegador.visitarPagina("https://www.facebook.com");
 			std::string nombreArchivo = "prueba.txt";
 			navegador.guardarSeccion(nombreArchivo);
 			GestorArchivos gestorArchivos;
 			Assert::IsTrue(gestorArchivos.verificarArchivo(nombreArchivo));
+		}
+		TEST_METHOD(cargarArchivoPrueba)
+		{
+			NavegadorWeb& navegador = NavegadorWeb::getNavegadorWeb();
+			std::string nombreArchivo = "prueba2.txt";
+			GestorArchivos gestorArchivos;
+			Assert::IsTrue(gestorArchivos.verificarArchivo(nombreArchivo));
+			Pestana* nuevaPestana = new Pestana(false); 
+			Pagina* nuevaPagina = new Pagina("Facebook", "https://www.facebook.com");
+			nuevaPestana->visitarPagina(nuevaPagina);
+			navegador.getPestanaLista()->agregarPestana(nuevaPestana);
+			navegador.guardarSeccion(nombreArchivo);
+			navegador.cargarSeccion(nombreArchivo);
+			Pestana* pestanaActiva = navegador.getPestanaLista()->obtenerPestanaActiva();
+			Assert::IsNotNull(pestanaActiva);
+			Pagina* paginaActiva = navegador.getPestanaLista()->obtenerPaginaActiva();
+			Assert::IsNotNull(paginaActiva);
+			std::string urlEsperada = "https://www.facebook.com";
+			Assert::AreEqual(urlEsperada.c_str(), paginaActiva->getURL().c_str(),
+				"La URL cargada no coincide con la esperada.");
 		}
 	};
 }

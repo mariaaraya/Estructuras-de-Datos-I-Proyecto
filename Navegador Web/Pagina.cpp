@@ -35,7 +35,7 @@ Pagina::~Pagina() {
 }
 
 // Getters
-std::string Pagina::getTitulo() const { return titulo; }
+std::string Pagina::getTitulo() const { return this->titulo; }
 std::string Pagina::getURL() const { return URL; }
 Marcador* Pagina::getMarcador() { return marcador; }
 
