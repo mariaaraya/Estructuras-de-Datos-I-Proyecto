@@ -17,9 +17,6 @@ int main() {
 
     _CrtDumpMemoryLeaks(); // cuando se depura nos dice si hay memory leaks
 
-    //Hola Kendraaa
-
-    system("pause");
     return 0;
 }
 

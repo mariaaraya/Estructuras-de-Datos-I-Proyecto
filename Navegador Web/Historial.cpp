@@ -41,6 +41,9 @@ void Historial::mostrarPaginaActiva()
         std::cout << **PaginaActiva << std::endl;
     }
        
+    else {
+        std::cout << " " << std::endl;
+    }
 }
 
 bool Historial::navegarAtras()
@@ -89,14 +92,14 @@ bool Historial::eliminarPaginaFrente()
 void Historial::Filtro(std::string caracteres)
 {
     std::transform(caracteres.begin(), caracteres.end(), caracteres.begin(), ::tolower);
-   
+
     for (auto& pagina : listaP) {
         bool contieneCaracter = false;
-        std::string url = pagina->getURL();
-        std::transform(url.begin(), url.end(), url.begin(), ::tolower);
-      
+        std::string titulo = pagina->getTitulo();
+        std::transform(titulo.begin(), titulo.end(), titulo.begin(), ::tolower);
+
         for (char c : caracteres) {
-            if (url.find(c) != std::string::npos) {
+            if (titulo.find(c) != std::string::npos) {
                 contieneCaracter = true;
                 break;
             }
