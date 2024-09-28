@@ -85,7 +85,7 @@ int MenuPrincipal::menuFiltroyBusqueda()
 
 std::string MenuPrincipal::nombreFiltro()
 {
-    std::cout << "(Filtrado por letras, por ejemplo, que solo muestre por las letras A y C. Puede ingresar múltiples letras.)" << std::endl;
+    std::cout << "(Filtrado por letras, por ejemplo, que solo muestre por las letras A y C. Puede ingresar multiples letras.)" << std::endl;
     std::string filtro = "";
     std::cout << "Ingrese el filtro:";
     std::cin >> filtro;
