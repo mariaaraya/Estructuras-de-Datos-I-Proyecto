@@ -158,30 +158,29 @@ std::string Historial::buscarPaginas(const std::string& nombreMarcador) const
 void Historial::aplicarPoliticasHistorial(int limiteHistorial, int TiempoLimpiar)
 {
     while (listaP.size() > limiteHistorial) {
+        std::cout << "Eliminando página del frente. Tamaño actual: " << listaP.size() << std::endl;
         eliminarPaginaFrente();
-      
     }
+
     auto ahora = std::chrono::system_clock::now();
     auto tiempoLimpiar = std::chrono::minutes(TiempoLimpiar);
 
     for (auto it = listaP.begin(); it != listaP.end();) {
         auto fechaVisita = (*it)->getFechaVisita();
-        auto tiempoVisita = std::chrono::duration_cast<std::chrono::hours>(ahora - fechaVisita);
+        auto tiempoVisita = std::chrono::duration_cast<std::chrono::minutes>(ahora - fechaVisita);
 
-        std::time_t fechaVisitaTimeT = std::chrono::system_clock::to_time_t(fechaVisita);
-        std::tm tm;
-        localtime_s(&tm, &fechaVisitaTimeT);
 
-        if (tiempoVisita > tiempoLimpiar) {
+
+        if (tiempoVisita >= tiempoLimpiar) {
+          
             if (PaginaActiva == it) {
                 PaginaActiva = std::next(it);
-            
             }
             it = listaP.erase(it);
-          
         }
         else {
             ++it;
         }
+
     }
 }

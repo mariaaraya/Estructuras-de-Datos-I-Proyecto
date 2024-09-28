@@ -73,7 +73,6 @@ bool NavegadorWeb::visitarPagina(std::string url)
 	if (aux) {
 		Pagina* copiaAux = new Pagina(*aux);
 		pestanaLista->visitarPagina(copiaAux);
-		//pestanaLista->aplicarPoliticasHistorial(configuracion->getLimiteHistorial() , configuracion->getTiempoLimpiar());
 		return true;
 	}
 	return false;
