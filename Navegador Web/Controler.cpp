@@ -51,7 +51,7 @@ void Controler::controlPrincipal()
 				system("cls");
 				break;
 			case 6:
-				Busqueda();
+				FiltroyBusqueda();
 				system("cls");
 				break;
 			case 7:
@@ -88,7 +88,7 @@ void Controler::controlPrincipal()
 			system("pause");
 			system("cls");
 		}
-	} while (opcion != 8);
+	} while (opcion != 9);
 }
 
 /* Case 1*/
@@ -125,12 +125,57 @@ void Controler::MMarcador()
 	}
 	system("pause");
 }
-/* Case 4*/
+
 void Controler::ModoIncognito()
 {
 	navegador->crearPestana(true);
 }
-/* Case 5*/
+
+void Controler::FiltroyBusqueda()
+{
+	do {
+		opcion = MenuPrincipal::menuFiltroyBusqueda();
+		system("pause");
+		system("cls");
+		try {
+			switch (opcion) {
+			case 1:
+				Filtro();
+				system("cls");
+				break;
+			case 2:
+				Busqueda();
+				system("cls");
+				break;
+			case 3:
+				break;
+			default:
+				throw new ExcepcionFueraRango();
+				break;
+			}
+		}
+		catch (Excepcion* e)
+		{
+			MenuPrincipal::excepcion(e);
+			system("pause");
+			system("cls");
+			delete e;
+		}
+		catch (...) {
+			MenuPrincipal::error();
+			system("pause");
+			system("cls");
+		}
+	} while (opcion != 3);
+}
+
+
+
+void Controler::Filtro()
+{
+	std::string filtro = MenuPrincipal::nombreFiltro();
+	navegador->Filtro(filtro);
+}
 void Controler::Busqueda()
 {
 	std::string marcador = MenuPrincipal::nombreMarcador();
@@ -139,7 +184,7 @@ void Controler::Busqueda()
 	system("cls");
 }
 
-/* Case 6*/
+
 void Controler::CConfiguracion()
 {
 	Configuracion* configuracion = MenuPrincipal::crearConfiguracion();
@@ -147,7 +192,7 @@ void Controler::CConfiguracion()
 	system("pause");
 	system("cls");
 }
-/* Case 7*/
+
 
 void Controler::Archivos()
 {

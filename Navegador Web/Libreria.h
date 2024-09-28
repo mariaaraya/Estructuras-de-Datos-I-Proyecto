@@ -11,3 +11,4 @@
 #include <ctime>
 #include <limits>
 #include <iomanip> // Para std::setw
+#include <algorithm>  // Para std::transform

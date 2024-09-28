@@ -19,6 +19,9 @@ public:
 	void MMarcador();
 	// Modo incógnito
 	void ModoIncognito();
+	//Filtro
+	void FiltroyBusqueda();
+	void Filtro();
 	//Búsqueda
 	void Busqueda();
 	//Configuració

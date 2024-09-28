@@ -10,6 +10,9 @@ public:
 	/*---Navegar---*/
 	static std::string URl();
 	static void pagina404();
+	/*---Filtro---*/
+	static int menuFiltroyBusqueda();
+	static std::string nombreFiltro();
 	/*---Marcador---*/
 	static std::string nombreMarcador();
 	static Marcador* marcador();

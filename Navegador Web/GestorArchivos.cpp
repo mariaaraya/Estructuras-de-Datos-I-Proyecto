@@ -99,137 +99,105 @@ void GestorArchivos::Guardar(const std::string nombreArchivo, ListaPestana* n) {
     handle.close();
 }
 
-bool GestorArchivos::verificarArchivo(const std::string nombreArchivo)
-{
-    std::ifstream handle(nombreArchivo, std::ios::binary);
-    if (!handle.is_open()) {
-        return false;
-    }
-    handle.close();
-    return true;
-}
 
 
 ListaPestana* GestorArchivos::Leer(const std::string nombreArchivo)
-{
+{;
     std::ifstream handle(nombreArchivo, std::ios::binary);
 
-    if (!handle.is_open()) {
-        throw std::runtime_error("Error al abrir el archivo '" + nombreArchivo + "'");
-    }
-
-    // Crear una nueva lista de pestañas
     ListaPestana* listaPestanas = new ListaPestana();
-
-    // Leer número de pestañas
-    size_t numPestanas;
-    handle.read(reinterpret_cast<char*>(&numPestanas), sizeof(numPestanas));
-
-    if (!handle) {
-        throw std::runtime_error("Error al leer el número de pestañas.");
+    if (!handle.is_open()) {
+        listaPestanas->agregarPestana(false); 
+        return listaPestanas;
     }
+    else {
+        // Leer número de pestañas
+        size_t numPestanas;
+        handle.read(reinterpret_cast<char*>(&numPestanas), sizeof(numPestanas));
 
-    // Leer cada pestaña
-    for (size_t i = 0; i < numPestanas; ++i) {
-        bool modoIncognito;
-        handle.read(reinterpret_cast<char*>(&modoIncognito), sizeof(modoIncognito));
+       
+        // Leer cada pestaña
+        for (size_t i = 0; i < numPestanas; ++i) {
+            bool modoIncognito;
+            handle.read(reinterpret_cast<char*>(&modoIncognito), sizeof(modoIncognito));
 
-        if (!handle) {
-            throw std::runtime_error("Error al leer el modo incógnito de la pestaña.");
-        }
 
-        // Crear una nueva pestaña
-        Pestana* pestana = new Pestana(modoIncognito);
+            // Crear una nueva pestaña
+            Pestana* pestana = new Pestana(modoIncognito);
 
-        bool hasHistorial;
-        handle.read(reinterpret_cast<char*>(&hasHistorial), sizeof(hasHistorial));
+            bool hasHistorial;
+            handle.read(reinterpret_cast<char*>(&hasHistorial), sizeof(hasHistorial));
 
-        if (hasHistorial) {
-            Historial* historial = new Historial();
-            pestana->setHistorial(historial);
+            if (hasHistorial) {
+                Historial* historial = new Historial();
+                pestana->setHistorial(historial);
 
-            // Leer el historial
-            size_t numPaginas;
-            handle.read(reinterpret_cast<char*>(&numPaginas), sizeof(numPaginas));
+                // Leer el historial
+                size_t numPaginas;
+                handle.read(reinterpret_cast<char*>(&numPaginas), sizeof(numPaginas));
 
-            if (!handle) {
-                throw std::runtime_error("Error al leer el número de páginas en el historial.");
-            }
+               
+                for (size_t j = 0; j < numPaginas; ++j) {
+                  
 
-            for (size_t j = 0; j < numPaginas; ++j) {
-                Pagina* pagina = new Pagina();
+                    // Leer título
+                    size_t tituloSize;
+                    handle.read(reinterpret_cast<char*>(&tituloSize), sizeof(tituloSize));
+                   
 
-                // Leer título
-                size_t tituloSize;
-                handle.read(reinterpret_cast<char*>(&tituloSize), sizeof(tituloSize));
-                if (!handle) {
-                    throw std::runtime_error("Error al leer el tamaño del título de la página.");
-                }
+                    std::string titulo(tituloSize, '\0');
+                    handle.read(&titulo[0], tituloSize);
+                  
 
-                std::string titulo(tituloSize, '\0');
-                handle.read(&titulo[0], tituloSize);
-                pagina->setTitulo(titulo);
+                    // Leer URL
+                    size_t URLSize;
+                    handle.read(reinterpret_cast<char*>(&URLSize), sizeof(URLSize));
 
-                // Leer URL
-                size_t URLSize;
-                handle.read(reinterpret_cast<char*>(&URLSize), sizeof(URLSize));
-                if (!handle) {
-                    throw std::runtime_error("Error al leer el tamaño de la URL de la página.");
-                }
 
-                std::string URL(URLSize, '\0');
-                handle.read(&URL[0], URLSize);
-                pagina->setURL(URL);
+                    std::string URL(URLSize, '\0');
+                    handle.read(&URL[0], URLSize);
+                   
+                    Pagina* pagina = new Pagina(titulo, URL);
+                    // Leer marcador
+                    bool hasMarcador;
+                    handle.read(reinterpret_cast<char*>(&hasMarcador), sizeof(hasMarcador));
 
-                // Leer marcador
-                bool hasMarcador;
-                handle.read(reinterpret_cast<char*>(&hasMarcador), sizeof(hasMarcador));
-                if (!handle) {
-                    throw std::runtime_error("Error al leer el indicador de marcador.");
-                }
 
-                if (hasMarcador) {
-                    Marcador* marcador = new Marcador();
-                    pagina->setMarcador(marcador);
+                    if (hasMarcador) {
+                        Marcador* marcador = new Marcador();
+                        pagina->setMarcador(marcador);
 
-                    // Leer nombre del marcador
-                    size_t nombreSize;
-                    handle.read(reinterpret_cast<char*>(&nombreSize), sizeof(nombreSize));
-                    if (!handle) {
-                        throw std::runtime_error("Error al leer el tamaño del nombre del marcador.");
-                    }
+                        // Leer nombre del marcador
+                        size_t nombreSize;
+                        handle.read(reinterpret_cast<char*>(&nombreSize), sizeof(nombreSize));
 
-                    std::string nombre(nombreSize, '\0');
-                    handle.read(&nombre[0], nombreSize);
-                    marcador->setNombre(nombre);
+                        std::string nombre(nombreSize, '\0');
+                        handle.read(&nombre[0], nombreSize);
+                        marcador->setNombre(nombre);
 
-                    // Leer etiquetas
-                    size_t etiquetasSize;
-                    handle.read(reinterpret_cast<char*>(&etiquetasSize), sizeof(etiquetasSize));
-                    if (!handle) {
-                        throw std::runtime_error("Error al leer el tamaño de las etiquetas.");
-                    }
+                        // Leer etiquetas
+                        size_t etiquetasSize;
+                        handle.read(reinterpret_cast<char*>(&etiquetasSize), sizeof(etiquetasSize));
 
-                    for (size_t k = 0; k < etiquetasSize; ++k) {
-                        size_t etiquetaSize;
-                        handle.read(reinterpret_cast<char*>(&etiquetaSize), sizeof(etiquetaSize));
-                        if (!handle) {
-                            throw std::runtime_error("Error al leer el tamaño de la etiqueta.");
+
+                        for (size_t k = 0; k < etiquetasSize; ++k) {
+                            size_t etiquetaSize;
+                            handle.read(reinterpret_cast<char*>(&etiquetaSize), sizeof(etiquetaSize));
+
+                            std::string etiqueta(etiquetaSize, '\0');
+                            handle.read(&etiqueta[0], etiquetaSize);
+                            marcador->agregarEtiqueta(etiqueta);
                         }
-
-                        std::string etiqueta(etiquetaSize, '\0');
-                        handle.read(&etiqueta[0], etiquetaSize);
-                        marcador->agregarEtiqueta(etiqueta);
                     }
-                }
 
-                historial->agregarPagina(pagina); // Agregar página al historial
+                    historial->agregarPagina(pagina); // Agregar página al historial
+                }
             }
+
+            listaPestanas->agregarPestana(pestana); // Agregar la pestaña a la lista
         }
 
-        listaPestanas->agregarPestana(pestana); // Agregar la pestaña a la lista
     }
-
     handle.close();
 
     return listaPestanas; // Retornar la lista de pestañas

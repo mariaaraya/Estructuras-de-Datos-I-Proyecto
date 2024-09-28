@@ -171,6 +171,11 @@ void ListaPestana::PMostrar()
     std::cout << "==========================================================================================\n\n";
 }
 
+void ListaPestana::Filtro(std::string filtro)
+{
+    (*PestanaActiva)->Filtro(filtro);
+}
+
 
 bool ListaPestana::agregarMarcador(Marcador* marcador)
 {

@@ -22,6 +22,8 @@ public:
 	void actualizarConfiguracion(Configuracion*);
 	// 4- Eliminar PestanaActiva
 	bool EliminarPestana();
+	// 5- Filtro
+	void Filtro(std::string);
 	/*----Sistema de marcadores----*/
 	// 1- Agregar marcador
 	bool agregarMarcador(Marcador*);

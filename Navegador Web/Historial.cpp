@@ -37,11 +37,10 @@ Pagina* Historial::obtenerPaginaActiva()
 
 void Historial::mostrarPaginaActiva()
 {
-    if (PaginaActiva != listaP.end()) {
+    if (PaginaActiva != listaP.end() && (*PaginaActiva)->getFiltro()) {
         std::cout << **PaginaActiva << std::endl;
     }
-    else
-        std::cout << "" << std::endl;
+       
 }
 
 bool Historial::navegarAtras()
@@ -85,6 +84,25 @@ bool Historial::eliminarPaginaFrente()
 		return true;
 	}
 	return false;
+}
+
+void Historial::Filtro(std::string caracteres)
+{
+    std::transform(caracteres.begin(), caracteres.end(), caracteres.begin(), ::tolower);
+   
+    for (auto& pagina : listaP) {
+        bool contieneCaracter = false;
+        std::string url = pagina->getURL();
+        std::transform(url.begin(), url.end(), url.begin(), ::tolower);
+      
+        for (char c : caracteres) {
+            if (url.find(c) != std::string::npos) {
+                contieneCaracter = true;
+                break;
+            }
+        }
+        pagina->setFiltro(contieneCaracter);
+    }
 }
 
 std::ostream& operator<<(std::ostream& outp, const Historial& h)

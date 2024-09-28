@@ -20,6 +20,7 @@ public:
 	bool PnavegarAtras();
 	bool visitarPagina(Pagina*);
 	void mostarPagina();
+	void Filtro(std::string);
 	//Metodo del marcadores
 	bool PagregarMarcador(Marcador*);
 	bool PagregarEtiqueta(std::string);

@@ -102,6 +102,10 @@ bool NavegadorWeb::EliminarPestana()
 {
 	return pestanaLista->EliminarPestana();
 }
+void NavegadorWeb::Filtro(std::string filtro)
+{
+	pestanaLista->Filtro(filtro);
+}
 /*===========================================================================*/
 
 /*=========================Sistema de marcadores=========================*/
@@ -135,13 +139,9 @@ void NavegadorWeb::guardarSeccion(const std::string nombreArchivo)
 /*Carga el navegadro anteriormente guardado*/
 void NavegadorWeb::cargarSeccion(const std::string nombreArchivo)
 {
-	if (archivos->verificarArchivo(nombreArchivo) == true) {
 		delete pestanaLista;
 		pestanaLista = archivos->Leer(nombreArchivo);
-	}
-	else {
-		std::cout << "Error en cargar el archivo" << std::endl;
-	}
+	
 }
 
 

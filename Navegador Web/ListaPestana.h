@@ -22,6 +22,7 @@ public:
 	bool navegarAdelanteP();
 	void mostarPagina();
 	void PMostrar();
+	void Filtro(std::string);
 	//Metodo del marcadores
 	bool agregarMarcador(Marcador*);
 	bool agregarEtiqueta(std::string);

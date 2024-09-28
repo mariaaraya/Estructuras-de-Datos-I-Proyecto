@@ -39,6 +39,11 @@ void Pestana::mostarPagina()
 	historial->mostrarPaginaActiva();
 }
 
+void Pestana::Filtro(std::string filtro)
+{
+	historial->Filtro(filtro);
+}
+
 
 std::ostream& operator<<(std::ostream& outp, const Pestana& pestana)
 {

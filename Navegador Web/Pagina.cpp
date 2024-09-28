@@ -2,21 +2,21 @@
 
 
 Pagina::Pagina(std::string titulo1, std::string url)
-    : titulo(titulo1), URL(url), marcador(nullptr), fechaVisita(std::chrono::system_clock::now()) {
+    : titulo(titulo1), URL(url), marcador(nullptr), filtro(true), fechaVisita(std::chrono::system_clock::now()) {
     std::time_t fechaVisitaTimeT = std::chrono::system_clock::to_time_t(fechaVisita);
     std::tm tm;
     localtime_s(&tm, &fechaVisitaTimeT);
 
 }
 
-Pagina::Pagina(std::string titulo1, std::string url, Marcador* marca)
-    : titulo(titulo1), URL(url), marcador(marca), fechaVisita(std::chrono::system_clock::now()) {
+Pagina::Pagina(std::string titulo1, std::string url, Marcador* marca) 
+    : titulo(titulo1), URL(url), marcador(marca), filtro(true) , fechaVisita(std::chrono::system_clock::now()) {
     std::time_t fechaVisitaTimeT = std::chrono::system_clock::to_time_t(fechaVisita);
     std::tm tm;
     localtime_s(&tm, &fechaVisitaTimeT);
 }
 
-Pagina::Pagina(const Pagina& otra) : titulo(otra.titulo), URL(otra.URL) {
+Pagina::Pagina(const Pagina& otra) : titulo(otra.titulo), URL(otra.URL) , filtro(otra.filtro) {
     fechaVisita = std::chrono::system_clock::now();
     std::time_t fechaVisitaTimeT = std::chrono::system_clock::to_time_t(fechaVisita);
     std::tm tm;
@@ -38,7 +38,7 @@ Pagina::~Pagina() {
 std::string Pagina::getTitulo() const { return this->titulo; }
 std::string Pagina::getURL() const { return URL; }
 Marcador* Pagina::getMarcador() { return marcador; }
-
+bool Pagina::getFiltro(){return filtro;}
 // Setters
 void Pagina::setTitulo(std::string nuevoTitulo) { titulo = nuevoTitulo; }
 void Pagina::setURL(std::string nuevaURL) { URL = nuevaURL; }
@@ -48,6 +48,9 @@ void Pagina::setMarcador(Marcador* nuevoMarcador)
     if (marcador) delete marcador;
     marcador = nuevoMarcador;
 }
+
+void Pagina::setFiltro(bool fil){filtro = fil;}
+
 
 bool Pagina::agregarEtiqueta(std::string tag)
 {

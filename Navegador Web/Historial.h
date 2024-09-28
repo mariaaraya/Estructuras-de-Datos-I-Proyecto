@@ -15,6 +15,7 @@ public:
     bool navegarAdelante();
     const std::list<Pagina*>& obtenerListaPaginas() const;
     bool eliminarPaginaFrente();
+    void Filtro(std::string);
     friend std::ostream& operator<<(std::ostream&, const Historial&);
     //Metodo del marcadores
     bool agregarMarcador(Marcador*);

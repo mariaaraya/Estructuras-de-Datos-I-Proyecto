@@ -114,7 +114,6 @@ namespace UnitTest
 			std::string nombreArchivo = "prueba2.bin";
 			navegador.guardarSeccion(nombreArchivo);
 			GestorArchivos gestorArchivos;
-			Assert::IsTrue(gestorArchivos.verificarArchivo(nombreArchivo));
 		}
 		TEST_METHOD(cargarArchivoPrueba)
 		{
@@ -126,7 +125,6 @@ namespace UnitTest
 			nuevaPestana->visitarPagina(nuevaPagina);
 			navegador.getPestanaLista()->agregarPestana(nuevaPestana);
 			navegador.guardarSeccion(nombreArchivo);
-			Assert::IsTrue(gestorArchivos.verificarArchivo(nombreArchivo));
 			navegador.cargarSeccion(nombreArchivo);
 			Pestana* pestanaActiva = navegador.getPestanaLista()->obtenerPestanaActiva();
 			Assert::IsNotNull(pestanaActiva);

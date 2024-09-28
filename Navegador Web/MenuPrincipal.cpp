@@ -9,41 +9,41 @@ int MenuPrincipal::menuPrincipal()
     int opcion = 0;
     std::cout << "\n--------------- M E N U ------------------\n";
     std::cout << "[1] Ir al sitio web\n";
-    std::cout << "[2] Nueva pestaña\n";
-    std::cout << "[3] Eliminar pestaña\n";
-    std::cout << "[4] Marcadores\n";  
+    std::cout << "[2] Nueva pestana\n";
+    std::cout << "[3] Eliminar pestana\n";
+    std::cout << "[4] Marcadores\n";
     std::cout << "[5] Modo incognito\n";
-    std::cout << "[6] Búsqueda\n";
-    std::cout << "[7] Configuración\n";
-    std::cout << "[8] Importación y exportación\n";
-    std::cout << "[9] Salir\n";  
+    std::cout << "[6] Filtros/Busqueda\n";
+    std::cout << "[7] Configuracion\n";
+    std::cout << "[8] Importacion y exportacion\n";  
+    std::cout << "[9] Salir\n"; 
 
     std::cout << "Ingrese la ocpion: ";
     while (true) {
-        int tecla = _getch(); // Captura la tecla presionada
-        if (tecla >= '1' && tecla <= '8') { // Verifica si la tecla es un número válido
-            opcion = tecla - '0'; // Convierte el carácter a número
+        int tecla = _getch();
+        if (tecla >= '1' && tecla <= '9') {
+            opcion = tecla - '0';
             break;
         }
-        else if (tecla == 0 || tecla == 224) { // Detecta si es una tecla especial
-            tecla = _getch(); // Captura el segundo carácter
-            switch (tecla) {
-            case 72: // Flecha arriba
-            case 80: // Flecha abajo
-            case 75: // Flecha izquierda
-            case 77: // Flecha derecha
-                return tecla;
-            default:
-                break;
+            else if (tecla == 0 || tecla == 224) { // Detecta si es una tecla especial
+                tecla = _getch(); // Captura el segundo carácter
+                switch (tecla) {
+                case 72: // Flecha arriba
+                case 80: // Flecha abajo
+                case 75: // Flecha izquierda
+                case 77: // Flecha derecha
+                    return tecla;
+                default:
+                    break;
+                }
+            }
+            else {
+                std::cout << "Opcion no valida. Por favor, ingrese un numero entre 1 y 9.\n";
             }
         }
-        else {
-            std::cout << "Opcion no valida. Por favor, ingrese un numero entre 1 y 8.\n";
-        }
-    }
-    std::cout << opcion << std::endl;
-    return opcion;
-}
+        std::cout << opcion << std::endl;
+        return opcion;
+ }
 
 std::string MenuPrincipal::URl()
 {
@@ -64,6 +64,33 @@ void MenuPrincipal::pagina404()
     std::cout << "Lo sentimos, la pagina que buscas no existe.\n";
     std::cout << "Por favor, verifica la URL e intenta nuevamente.\n";
     std::cout << border << "\n";
+}
+
+int MenuPrincipal::menuFiltroyBusqueda()
+{
+    int opcion = 0;
+    std::cout << "[1] Filtros\n";
+    std::cout << "[2] Busqueda\n";
+    std::cout << "[3] Salir\n";
+    std::cout << "Ingrese la ocpion: ";
+    std::cin >> opcion;
+    std::cout << "\n";
+    if (std::cin.fail() || opcion <= 0) {
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    }
+    return opcion;
+
+}
+
+std::string MenuPrincipal::nombreFiltro()
+{
+    std::string filtro = "";
+    std::cout << "Ingrese el filtro:";
+    std::cin >> filtro;
+    std::cout << "\n";
+
+    return filtro;
 }
 
 
