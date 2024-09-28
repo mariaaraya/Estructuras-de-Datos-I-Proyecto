@@ -75,9 +75,6 @@
     <ClCompile Include="Marcador.cpp">
       <Filter>Archivos de origen\Navegador\Historial\Pagina\Marcador</Filter>
     </ClCompile>
-    <ClCompile Include="VectorMarcador.cpp">
-      <Filter>Archivos de origen\Navegador\Historial\Pagina\Marcador</Filter>
-    </ClCompile>
     <ClCompile Include="Configuracion.cpp">
       <Filter>Archivos de origen\Configuracion</Filter>
     </ClCompile>
@@ -117,9 +114,6 @@
       <Filter>Archivos de encabezado\Navegador\Historial\Pagina</Filter>
     </ClInclude>
     <ClInclude Include="Marcador.h">
-      <Filter>Archivos de encabezado\Navegador\Historial\Pagina\Marcador</Filter>
-    </ClInclude>
-    <ClInclude Include="VectorMarcador.h">
       <Filter>Archivos de encabezado\Navegador\Historial\Pagina\Marcador</Filter>
     </ClInclude>
     <ClInclude Include="Libreria.h">
