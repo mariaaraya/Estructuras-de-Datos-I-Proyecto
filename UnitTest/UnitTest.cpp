@@ -111,7 +111,7 @@ namespace UnitTest
 			NavegadorWeb& navegador = NavegadorWeb::getNavegadorWeb();
 			navegador.crearPestana(false);
 			navegador.visitarPagina("https://www.facebook.com");
-			std::string nombreArchivo = "prueba.txt";
+			std::string nombreArchivo = "prueba2.bin";
 			navegador.guardarSeccion(nombreArchivo);
 			GestorArchivos gestorArchivos;
 			Assert::IsTrue(gestorArchivos.verificarArchivo(nombreArchivo));
@@ -119,14 +119,14 @@ namespace UnitTest
 		TEST_METHOD(cargarArchivoPrueba)
 		{
 			NavegadorWeb& navegador = NavegadorWeb::getNavegadorWeb();
-			std::string nombreArchivo = "prueba2.txt";
+			std::string nombreArchivo = "prueba2.bin";
 			GestorArchivos gestorArchivos;
-			Assert::IsTrue(gestorArchivos.verificarArchivo(nombreArchivo));
 			Pestana* nuevaPestana = new Pestana(false); 
 			Pagina* nuevaPagina = new Pagina("Facebook", "https://www.facebook.com");
 			nuevaPestana->visitarPagina(nuevaPagina);
 			navegador.getPestanaLista()->agregarPestana(nuevaPestana);
 			navegador.guardarSeccion(nombreArchivo);
+			Assert::IsTrue(gestorArchivos.verificarArchivo(nombreArchivo));
 			navegador.cargarSeccion(nombreArchivo);
 			Pestana* pestanaActiva = navegador.getPestanaLista()->obtenerPestanaActiva();
 			Assert::IsNotNull(pestanaActiva);
