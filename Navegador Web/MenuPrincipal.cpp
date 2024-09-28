@@ -47,6 +47,7 @@ int MenuPrincipal::menuPrincipal()
 
 std::string MenuPrincipal::URl()
 {
+    std::cout << "Solo es vigente para los sitios del csv"<<std::endl;
     std::string url = "" ;
     std::cout << "Ingrese el URL:";
     std::cin >> url;
@@ -85,6 +86,7 @@ int MenuPrincipal::menuFiltroyBusqueda()
 
 std::string MenuPrincipal::nombreFiltro()
 {
+    std::cout << "(Filtrado por letras por ejemplo, que solo muestre por la letra A)"<<std::endl;
     std::string filtro = "";
     std::cout << "Ingrese el filtro:";
     std::cin >> filtro;
@@ -231,6 +233,8 @@ void MenuPrincipal::bienvenida()
     std::cout << "Por ejemplo: Primera pestanna almacena las primera paginas" << std::endl;
     std::cout << "La segunda pestanna almacena las otra paginas, y para navegar a esta apreta la tecla de Abajo" << std::endl;
     std::cout << "Asi continuamente puede navegar entre las pestannas del navegador web :)" << std::endl;
+    std::cout << "Para navegar entre paginas use las flecha de los lados, Izquierda y derecha" << std::endl;
+    std::cout << "Asi continuamente puede navegar entre las pestannas y paginas del navegador web :)" << std::endl;
     std::cout << std::endl << "Esperamos que su experiencia sea grata, que lo disfrute!" << std::endl<<std::endl;
 
 }
