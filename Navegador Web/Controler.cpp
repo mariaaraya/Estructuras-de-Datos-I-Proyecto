@@ -39,22 +39,26 @@ void Controler::controlPrincipal()
 				system("cls");
 				break;
 			case 3:
-				MMarcador();
+				EliminarPestana();
 				system("cls");
 				break;
 			case 4:
-				ModoIncognito();
+				MMarcador();
 				system("cls");
 				break;
 			case 5:
-				Busqueda();
+				ModoIncognito();
 				system("cls");
 				break;
 			case 6:
-				CConfiguracion();
+				Busqueda();
 				system("cls");
 				break;
 			case 7:
+				CConfiguracion();
+				system("cls");
+				break;
+			case 8:
 				Archivos();
 				system("cls");
 				break;
@@ -64,7 +68,7 @@ void Controler::controlPrincipal()
 			case 77:
 				Navegar();
 				break;
-			case 8:
+			case 9:
 				Finalizar();
 				system("cls");
 				break;
@@ -103,6 +107,11 @@ void Controler::Vistar()
 void Controler::NuevaPestana()
 {
 	navegador->crearPestana(false);
+}
+
+void Controler::EliminarPestana()
+{
+	navegador->EliminarPestana();
 }
 
 

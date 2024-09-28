@@ -91,6 +91,38 @@ bool ListaPestana::navegarAbajo()
     }
 }
 
+bool ListaPestana::EliminarPestana()
+{
+    if (listaP.empty() || PestanaActiva == listaP.end()) {
+        return false;
+    }
+
+    auto it = PestanaActiva;
+
+    // Si hay más de una pestaña
+    if (listaP.size() > 1) {
+        // Si no es la primera pestaña, mover la pestaña activa a la anterior
+        if (it != listaP.begin()) {
+            PestanaActiva = std::prev(it);
+        }
+        else {
+            // Si es la primera pestaña, mover la pestaña activa a la siguiente
+            PestanaActiva = std::next(it);
+        }
+    }
+    else {
+        // Si solo hay una pestaña, la lista quedará vacía
+        PestanaActiva = listaP.end();
+    }
+
+    delete* it;
+    listaP.erase(it);
+    if (listaP.empty()) {
+        agregarPestana(false); // Puedes ajustar el parámetro según sea necesario
+    }
+    return true;
+}
+
 const std::list<Pestana*>& ListaPestana::obtenerListaPestanas() const
 {
     return listaP;

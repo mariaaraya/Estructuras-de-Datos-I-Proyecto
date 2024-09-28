@@ -13,6 +13,8 @@ public:
 	void Vistar();
 	// Nueva pestaña
 	void NuevaPestana();
+	// EliminarPestaña
+	void EliminarPestana();
 	// Marcador
 	void MMarcador();
 	// Modo incógnito

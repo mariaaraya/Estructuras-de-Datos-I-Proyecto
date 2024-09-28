@@ -20,6 +20,8 @@ public:
 	void Mostrar();
 	// 3- Configuracion
 	void actualizarConfiguracion(Configuracion*);
+	// 4- Eliminar PestanaActiva
+	bool EliminarPestana();
 	/*----Sistema de marcadores----*/
 	// 1- Agregar marcador
 	bool agregarMarcador(Marcador*);

@@ -13,6 +13,7 @@ public:
 	void mostrarPestanaActiva();
 	bool navegarArriba();
 	bool navegarAbajo();
+	bool EliminarPestana();
 	const std::list<Pestana*>& obtenerListaPestanas() const;
 	friend std::ostream& operator<<(std::ostream&, const ListaPestana&);
 	/*Metdos relaciondos con las paginas*/

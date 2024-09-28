@@ -98,6 +98,10 @@ void NavegadorWeb::actualizarConfiguracion(Configuracion* confi)
 	if (configuracion) delete configuracion;
 	configuracion = confi;
 }
+bool NavegadorWeb::EliminarPestana()
+{
+	return pestanaLista->EliminarPestana();
+}
 /*===========================================================================*/
 
 /*=========================Sistema de marcadores=========================*/

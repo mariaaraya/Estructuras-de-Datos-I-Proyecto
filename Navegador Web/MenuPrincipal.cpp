@@ -9,13 +9,15 @@ int MenuPrincipal::menuPrincipal()
     int opcion = 0;
     std::cout << "\n--------------- M E N U ------------------\n";
     std::cout << "[1] Ir al sitio web\n";
-    std::cout << "[2] Nueva pestana\n";
-    std::cout << "[3] Marcadores\n";
-    std::cout << "[4] Modo incognito\n";
-    std::cout << "[5] Busqueda\n";
-    std::cout << "[6] Configuracion\n";
-    std::cout << "[7] Importacion y exportacion\n";
-    std::cout << "[8] Salir\n";
+    std::cout << "[2] Nueva pestaña\n";
+    std::cout << "[3] Eliminar pestaña\n";
+    std::cout << "[4] Marcadores\n";  
+    std::cout << "[5] Modo incognito\n";
+    std::cout << "[6] Búsqueda\n";
+    std::cout << "[7] Configuración\n";
+    std::cout << "[8] Importación y exportación\n";
+    std::cout << "[9] Salir\n";  
+
     std::cout << "Ingrese la ocpion: ";
     while (true) {
         int tecla = _getch(); // Captura la tecla presionada
