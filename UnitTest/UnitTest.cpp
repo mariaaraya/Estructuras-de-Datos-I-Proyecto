@@ -12,6 +12,7 @@
 #include "../Navegador Web/ExcepcionFueraRango.cpp"
 #include "../Navegador Web/ExcepcionCategoria.cpp"
 
+//Para la realización de las pruebas unitarias: https://learn.microsoft.com/es-es/visualstudio/test/writing-unit-tests-for-c-cpp?view=vs-2022
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
@@ -26,9 +27,9 @@ namespace UnitTest
 			NavegadorWeb& navegador = NavegadorWeb::getNavegadorWeb();
 			Assert::IsNotNull(navegador.getPestanaLista());
 			size_t cantidadAntes = navegador.getPestanaLista()->obtenerListaPestanas().size();
-			navegador.crearPestana(false); //Crear una pestaña normal
+			navegador.crearPestana(false); 
 			size_t cantidadDespues = navegador.getPestanaLista()->obtenerListaPestanas().size();
-			Assert::AreEqual(cantidadAntes + 1, cantidadDespues); //Para confirmar que en verdad se ha creado una pestaña			
+			Assert::AreEqual(cantidadAntes + 1, cantidadDespues); 		
 		}
 		TEST_METHOD(visitarPaginaPrueba)
 		{
@@ -73,7 +74,6 @@ namespace UnitTest
 		{
 			NavegadorWeb& navegador = NavegadorWeb::getNavegadorWeb();
 			navegador.crearPestana(true);
-			// Verificar que la pestaña sea en modo incógnito
 			Pestana* pestanaActiva = navegador.getPestanaLista()->obtenerPestanaActiva();
 			Assert::IsNotNull(pestanaActiva);
 			Assert::IsTrue(pestanaActiva->getModoIncognito());
