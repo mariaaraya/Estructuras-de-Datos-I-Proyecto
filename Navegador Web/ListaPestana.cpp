@@ -199,5 +199,3 @@ void ListaPestana::aplicarPoliticasHistorial(int limite, int tie)
 {
     (*PestanaActiva)->PaplicarPoliticasHistorial(limite , tie);
 }
-
-

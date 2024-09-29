@@ -143,8 +143,4 @@ void NavegadorWeb::cargarSeccion(const std::string nombreArchivo)
 	
 }
 
-
-
 /*===========================================================================*/
-
-

@@ -32,5 +32,5 @@ private:
 	std::string URL;
 	Marcador* marcador;
 	bool filtro;
-	std::chrono::system_clock::time_point fechaVisita;
+	std::chrono::system_clock::time_point fechaVisita; //usada de #include <chrono> , un punto en el tiempo
 };

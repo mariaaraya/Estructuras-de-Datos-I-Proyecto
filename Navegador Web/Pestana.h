@@ -32,5 +32,5 @@ public:
 private:
 	bool  modoIncognito; // true es que si es modoIncognito
 	Historial* historial;
-	std::chrono::system_clock::time_point fechaVisita;
+	std::chrono::system_clock::time_point fechaVisita; //usada de #include <chrono> , un punto en el tiempo
 };

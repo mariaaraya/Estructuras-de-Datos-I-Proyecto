@@ -16,4 +16,5 @@ private:
 	int limiteHistorial;
 	int tiempoLimpiar;
 };
-
+// limitar la cantidad de entradas en el historial y 
+//limpiar entradas viejas después de cierta cantidad de tiempo.

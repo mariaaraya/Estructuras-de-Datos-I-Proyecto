@@ -91,5 +91,3 @@ std::ostream& operator<<(std::ostream& outp, const Pagina& p)
     outp << p.getTitulo() << "\n" << p.getURL();
     return outp;
 }
-
-

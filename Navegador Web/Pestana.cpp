@@ -44,17 +44,13 @@ void Pestana::Filtro(std::string filtro)
 	historial->Filtro(filtro);
 }
 
-
 std::ostream& operator<<(std::ostream& outp, const Pestana& pestana)
 {
 	outp << *pestana.historial << std::endl;
 	return outp;
 }
 
-/*----------*/
-
 /*------------------------Marcador------------------------*/
-
 
 bool Pestana::PagregarMarcador(Marcador* marcador)
 {
@@ -71,12 +67,9 @@ std::string Pestana::PbuscarPaginas(const std::string& marcador) const
 	return historial->buscarPaginas(marcador);
 }
 
-
 /*-------------------Configuracion------------------------*/
-
 
 void Pestana::PaplicarPoliticasHistorial(int limite, int tie)
 {
 	historial->aplicarPoliticasHistorial(limite, tie);
 }
-

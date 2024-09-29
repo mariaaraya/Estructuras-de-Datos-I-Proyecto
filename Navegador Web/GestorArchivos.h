@@ -11,3 +11,4 @@ public:
 private:
 
 };
+// guardar el historial de navegación en un archivo (binario)

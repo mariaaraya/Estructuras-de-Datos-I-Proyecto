@@ -148,7 +148,6 @@ Configuracion* MenuPrincipal::crearConfiguracion()
     return aux;
 }
 
-
 /*---Archivos---*/
 int MenuPrincipal::menuArchivo()
 {
@@ -185,11 +184,7 @@ std::string MenuPrincipal::nombreArchivoLeer()
     return archivo;
 }
 
-
-
 /*--------------Comprobacion--------------*/
-
-
 
 void MenuPrincipal::comprobarint(int& entero)
 {
@@ -201,13 +196,7 @@ void MenuPrincipal::comprobarint(int& entero)
 }
 
 
-
-
-
-
-
 /*--------------Excepcion--------------*/
-
 
 void MenuPrincipal::excepcion(Excepcion* e)
 { 
@@ -221,9 +210,6 @@ void MenuPrincipal::error()
 }
 
 
-
-
-
 /*--------------Salida--------------*/
 void MenuPrincipal::bienvenida()
 {
@@ -231,7 +217,6 @@ void MenuPrincipal::bienvenida()
     std::cout<<std::endl<< "Para navegar entre pestannas use las flechas de Arriba y Abajo" << std::endl;
     std::cout << "Por ejemplo: Primera pestanna almacena las primera paginas" << std::endl;
     std::cout << "La segunda pestanna almacena las otra paginas, y para navegar a esta apreta la tecla de Abajo" << std::endl;
-    std::cout << "Asi continuamente puede navegar entre las pestannas del navegador web :)" << std::endl;
     std::cout << "Para navegar entre paginas use las flecha de los lados, Izquierda y derecha" << std::endl;
     std::cout << "Asi continuamente puede navegar entre las pestannas y paginas del navegador web :)" << std::endl;
     std::cout << std::endl << "Esperamos que su experiencia sea grata, que lo disfrute!" << std::endl<<std::endl;
@@ -247,5 +232,3 @@ void MenuPrincipal::salir()
 	std::cout << "\n----------> G R A C I A S   P O R   U T I L I Z A R <----------\n";
 
 }
-
-
