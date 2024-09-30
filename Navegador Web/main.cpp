@@ -15,6 +15,8 @@
 //Proporciona herramientas para rastrear la asignación y liberación de memoria dinámica, así como para detectar fugas de memoria.
 //Incluye macros útiles como _CrtSetDbgFlag, que se pueden usar para establecer el modo de depuración deseado.
 
+//Repositorio en GitHub: https://github.com/mariaaraya/Estructuras-de-Datos-I-Proyecto/tree/rama1
+
 #include "Clases.h"
 #include "Libreria.h"
 #include "MenuPrincipal.h"
